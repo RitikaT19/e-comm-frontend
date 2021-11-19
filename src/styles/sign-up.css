@@ -1,0 +1,12 @@
+.sign-up-main-div{
+    margin-top: 100px;
+   text-align: -webkit-center;
+}
+#email_element.label {
+    color: grey;
+    align-items: flex-start;
+    margin-right: 100px;
+}
+.sign_up_button_div{
+    margin-top:15px;
+}
