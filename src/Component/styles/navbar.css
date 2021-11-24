@@ -11,7 +11,11 @@ align-items: center;
 .active_class{
     color: grey;
     margin-left: 40px;
-    
+    text-decoration: none;
+}
+.dashboard{
+    color: white;
+    text-decoration: none;
 }
 #navbar_buttons{
     margin-left: 850px;

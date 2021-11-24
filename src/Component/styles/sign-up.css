@@ -10,3 +10,11 @@
 .sign_up_button_div{
     margin-top:15px;
 }
+.sign-in-error{
+    color: red;
+    font-style: italic;
+}
+.sign-in-success{
+    color: green;
+    font-style: italic;
+}
