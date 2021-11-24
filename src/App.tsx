@@ -1,5 +1,4 @@
 import React from "react";
-import { Navbar } from "./component/common/Navbar/Navbar";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { LoadingContextProvider } from "./contexts/Loading";
@@ -11,8 +10,13 @@ import { Dashboard } from "./component/Dashboard";
 import { Home } from "./component/HomePage";
 import { CategoryProvider } from "./contexts/Category";
 import {Category} from "./component/Category"
+import axios from "axios";
 
 function App() {
+  const token: string | null = localStorage.getItem("E_COMM:AUTH_TOKEN");
+  if (token) {
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  }
   return (
     <>
       <LoadingContextProvider>
@@ -20,7 +24,6 @@ function App() {
           <LoginContextProvider>
             <CategoryProvider>
               <Router>
-                <Navbar />
                 <Switch>
                   <Route path="/sign-up" component={SignUpAdmin} />
                   <Route path="/login" component={LoginAdmin} />

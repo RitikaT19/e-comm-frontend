@@ -3,13 +3,12 @@ import { SignUp } from "./SignUp";
 import { LoadingContext } from "../../contexts/Loading";
 import { SignUpContext } from "../../contexts/SignUp";
 import { addUser, clearErrors } from "../../actions/signUp";
+import { Navbar } from "../common/Navbar/Navbar";
 
 export const SignUpAdmin: React.FC = () => {
   const { state: signUpState, dispatch: signUpDispatch } =
     useContext(SignUpContext);
   const { dispatch: loadingDispatch } = useContext(LoadingContext);
-
-
 
   const clickSignUpButton = async (data: any) => {
     await addUser(data)(signUpDispatch, loadingDispatch).then(() => {
@@ -19,9 +18,12 @@ export const SignUpAdmin: React.FC = () => {
   };
   return (
     <div>
-      <SignUp handleSignUpButton={clickSignUpButton} 
-      errorMessage = {signUpState.error}
-      successMessage = {signUpState.addUserSuccess}/>
+      <Navbar />
+      <SignUp
+        handleSignUpButton={clickSignUpButton}
+        errorMessage={signUpState.error}
+        successMessage={signUpState.addUserSuccess}
+      />
     </div>
   );
 };

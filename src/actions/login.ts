@@ -41,3 +41,18 @@ export const signIn =
       });
     }
   };
+
+
+  export const logout = () => {
+    try {
+      // Remove the JWT token, idle limit and encryption key from the local storage
+      localStorage.clear();
+      // Reload the application from the index
+      window.location.href = "/dashboard";
+    } catch (err) {
+      // In case of errors, log the response and move the user to the Error page
+      console.log(err);
+      window.location.href = "/dashboard";
+    }
+  };
+  

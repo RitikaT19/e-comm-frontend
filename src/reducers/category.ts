@@ -41,6 +41,7 @@ export const initialState: State = {
 };
 
 export const Category = (state: State = initialState, action: Actions) => {
+  console.log(action.type, "action")
   switch (action.type) {
     case CREATE_CATEGORY:
       return {

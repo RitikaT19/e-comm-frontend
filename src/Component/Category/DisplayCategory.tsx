@@ -2,11 +2,14 @@ import React from "react";
 import Button from "../common/Button/Button";
 
 interface Props {
-    categoryDetails : any,
+    categoryInfo : any,
     addCategoryClick: any
 
 }
-export const DisplayCategory: React.FC<Props> = ({addCategoryClick, categoryDetails}) =>{
+export const DisplayCategory: React.FC<Props> = ({addCategoryClick, categoryInfo}) =>{
+
+    console.log(categoryInfo, "info")
+    JSON.stringify(categoryInfo)
     return(
         <div className = "display-category-container">
             <div className = "display-category-action">
@@ -20,7 +23,7 @@ export const DisplayCategory: React.FC<Props> = ({addCategoryClick, categoryDeta
             </div>
             
          <div className = "display-category">
-            {categoryDetails?.map((item: any, index: number)=>(
+            {categoryInfo?.map((item: any)=>(
                 <p id = {"display-category-name"}>{item.name}</p>
             ))}
         </div> 

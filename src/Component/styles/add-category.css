@@ -1,0 +1,32 @@
+.add-category-container {
+  margin-top: 50px;
+  text-align: -webkit-center;
+  align-self: center;
+  backdrop-filter: blur(1.7px);
+  width: 100vw;
+  height: 150vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  /* display: flex; */
+  
+  z-index:2000;
+  left:0;
+  top:0;
+}
+.add-category-div{
+    margin-top: 150px;
+}
+#category-name_element{
+    color: black;
+    align-items: flex-start;
+    width: 400px;
+}
+#add-category-button_element{
+    margin-top: 10px;
+}
+.close-button{
+    margin-left: 390px;
+    align-content: flex-end;
+    color:white;
+    cursor: pointer;
+}
