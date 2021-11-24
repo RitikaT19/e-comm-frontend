@@ -11,6 +11,8 @@ import { Home } from "./component/HomePage";
 import { CategoryProvider } from "./contexts/Category";
 import {Category} from "./component/Category"
 import axios from "axios";
+import { Product } from "./component/Product";
+import {ProductContextProvider} from "./contexts/Product"
 
 function App() {
   const token: string | null = localStorage.getItem("E_COMM:AUTH_TOKEN");
@@ -23,6 +25,7 @@ function App() {
         <SignUpContextProvider>
           <LoginContextProvider>
             <CategoryProvider>
+              <ProductContextProvider>
               <Router>
                 <Switch>
                   <Route path="/sign-up" component={SignUpAdmin} />
@@ -30,8 +33,10 @@ function App() {
                   <Route path="/dashboard" component={Dashboard} />
                   <Route path="/home" component={Home} />
                   <Route path="/category" component={Category} />
+                  <Route path = "/product" component={Product}/>
                 </Switch>
               </Router>
+              </ProductContextProvider>
             </CategoryProvider>
           </LoginContextProvider>
         </SignUpContextProvider>
