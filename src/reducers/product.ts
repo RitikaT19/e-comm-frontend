@@ -37,7 +37,7 @@ import {
     createProductError: null,
     createProductSuccess: null,
     fetchProductError: null,
-    fetchProductSuccess: {},
+    fetchProductSuccess: [],
   };
   
   export const Product = (state: State = initialState, action: Actions) => {

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import "../../styles/sidebar.css";
 import Button from "../Button/Button";
 import {logout} from "../../../actions/login"
-import { LogoutButton } from "../LogoutButton/LogoutButton";
+import{LogoutButton} from "../LogoutButton/LogoutButton"
 
 export const SideBar: React.FC = () => {
   return (

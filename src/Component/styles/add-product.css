@@ -1,0 +1,43 @@
+.add-product-main-container {
+    margin-top: 50px;
+    text-align: -webkit-center;
+    align-self: center;
+    backdrop-filter: blur(1.7px);
+    width: 100vw;
+    height: 150vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    /* display: flex; */
+    z-index:2000;
+    left:0;
+    top:0;
+  }
+  .add-product-div{
+      margin-top: 0px;
+  }
+  #product-name_element{
+      color: black;
+      align-items: flex-start;
+      width: 400px;
+  }
+  #add-product-button_element{
+      margin-top: 10px;
+  }
+  .close-button{
+      margin-left: 500px;
+      align-content: flex-end;
+      color:white;
+      cursor: pointer;
+  }
+  #description_element{
+      margin-left: 145px;
+  }
+  .Dropdown-control{
+      margin-top: 10px;
+      width: 40.5%;
+      border-color: black;
+  }
+  .Dropdown-menu{
+    width: 40.5%;
+
+  }

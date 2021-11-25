@@ -37,7 +37,7 @@ export const initialState: State = {
   createCategoryError: null,
   createCategorySuccess: null,
   fetchCategoryError: null,
-  fetchCategorySuccess: {},
+  fetchCategorySuccess: [],
 };
 
 export const Category = (state: State = initialState, action: Actions) => {

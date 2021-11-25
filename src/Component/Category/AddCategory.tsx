@@ -4,7 +4,6 @@ import { Textfield } from "../common/Textfield/Textfield";
 import "../styles/add-category.css";
 import cross from "../../assets/Icons/cross.png";
 
-
 interface Props {
   handleAddCategory: any;
   CrossIconClick: any;
@@ -22,9 +21,8 @@ export const AddCategory: React.FC<Props> = ({
   };
   return (
     <div className="add-category-container">
-       
       <div className="add-category-div">
-      <div className="close-button">
+        <div className="close-button">
           <img src={cross} alt="cross" onClick={CrossIconClick} />
         </div>
         <Textfield

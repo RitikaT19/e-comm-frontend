@@ -15,12 +15,14 @@ export const getCategory =
     try {
       startLoading(loadingDispatch);
       const result = await axios.get(`${API_URL}/category/get_category`);
+      console.log(typeof result.data.data, "fetch category")
       dispatch({
         type: FETCH_CATEGORY,
         payload: result.data.data,
       });
       console.log(result, "result")
-      console.log("from axios", result);
+      console.log("from axios", result.data.data);
+      console.log("from axios", typeof result.data.data);
     } catch (error: any) {
       stopLoading(loadingDispatch);
       dispatch({
@@ -45,9 +47,7 @@ export const getCategory =
         type: CREATE_CATEGORY,
         payload: result.data.result
       })
-      console.log(result, "create category")
-
-
+    
     }catch(error: any){
       stopLoading(loadingDispatch);
       dispatch({

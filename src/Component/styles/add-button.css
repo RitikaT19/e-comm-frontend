@@ -1,0 +1,23 @@
+.add-button{
+    width: auto;
+    display: flex;
+    /* flex-direction: row;
+    justify-content: right;
+    align-items:center; */
+    color:#333333;
+    margin-top: -5px;
+    margin-left: 1060px;
+    
+    
+}
+
+.add-icon{
+    cursor: pointer;
+    padding-right:5px ;
+    margin-bottom: 5px;
+
+}
+.add-text-div{
+    margin-right: 5px;
+    cursor: pointer;
+}

@@ -20,11 +20,13 @@ export const getProduct =
     try {
       startLoading(loadingDispatch);
       const result = await axios.get(`${API_URL}/product/get_product`);
+      console.log(result.data.data, "from axios product")
       dispatch({
         type: FETCH_PRODUCT,
         payload: result.data.data,
       });
-      console.log(result.data.data, "from axios product")
+      console.log(result, "create product")
+      
     } catch (error: any) {
       stopLoading(loadingDispatch);
       dispatch({
@@ -35,3 +37,29 @@ export const getProduct =
       });
     }
   };
+
+
+  export const createProduct = (data: any) =>
+  async(
+    dispatch: React.Dispatch<Actions>,
+    loadingDispatch: React.Dispatch<LoadingActions>
+  ) =>{
+    try{
+      startLoading(loadingDispatch);
+      const result = await axios.post(`${API_URL}/product/`,data)
+      stopLoading(loadingDispatch)
+      console.log(result, "create product from axios")
+      dispatch({
+        type: CREATE_PRODUCT,
+        payload: result.data
+      })
+
+    }catch(error: any){
+      stopLoading(loadingDispatch);
+      dispatch({
+        type: CREATE_PRODUCT_ERROR,
+        payload: error.response?error.response.data?.message
+        :"Failed to connect with the server"
+      })
+    }
+  }
