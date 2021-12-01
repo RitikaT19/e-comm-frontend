@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SideBar } from "../common/SideBar/Sidebar";
-import { Container } from "../common/WhiteContainer/Container";
 import { createNewCategory, getCategory } from "../../actions/category";
 import { CategoryContext } from "../../contexts/Category";
 import { LoadingContext } from "../../contexts/Loading";

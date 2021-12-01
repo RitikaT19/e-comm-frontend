@@ -29,7 +29,7 @@ function App() {
                 <Route path="/login" component={LoginAdmin} />
                   <Route path="/sign-up" component={SignUpAdmin} />
                   <Route path="/category" component={Category} />
-                  <Route path = "/product" component={Product}/>
+                  <Route path = "/product/:id" component={Product}/>
                 </Switch>
               </Router>
               </ProductContextProvider>

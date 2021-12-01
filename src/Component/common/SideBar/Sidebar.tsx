@@ -17,7 +17,7 @@ export const SideBar: React.FC = () => {
         <NavLink exact className="active_class" to="/category">
           Category
         </NavLink>
-        <NavLink exact className="active_class" to="/product">
+        <NavLink exact className="active_class" to="/product/61974a3625fde0c069255ed5">
           Product
         </NavLink>
         <NavLink exact className="active_class" to="/sign-up">
