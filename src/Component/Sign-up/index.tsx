@@ -6,15 +6,15 @@ import { addUser, clearErrors } from "../../actions/signUp";
 import { SideBar } from "../common/SideBar/Sidebar";
 
 export const SignUpAdmin: React.FC = () => {
+    //rename state and dispatch as signUpState and signUpDispatch respectively
   const { state: signUpState, dispatch: signUpDispatch } =
     useContext(SignUpContext);
   const { dispatch: loadingDispatch } = useContext(LoadingContext);
 
+  // function for signing up a user
   const clickSignUpButton = async (data: any) => {
-    await addUser(data)(signUpDispatch, loadingDispatch).then(() => {
-      console.log("add a new user", data);
-    });
-    // clearErrors(signUpDispatch)
+    // call addUser action
+    await addUser(data)(signUpDispatch, loadingDispatch)
   };
   return (
     <div>

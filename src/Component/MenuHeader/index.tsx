@@ -6,16 +6,17 @@ import { getCategory } from "../../actions/category";
 import "../styles/menu-header.css"
 
 export const MenuHeader: React.FC = () => {
+    //rename state and dispatch as categoryState and categoryDispatch respectively
   const { state: categoryState, dispatch: categoryDispatch } =
     useContext(CategoryContext);
   const { dispatch: loadingDispatch } = useContext(LoadingContext);
 
+  // function for fetching category
   const fetchCategory = async () => {
-    await getCategory()(categoryDispatch, loadingDispatch).then(() => {
-      console.log(categoryState.fetchCategorySuccess);
-    });
+    // call getCategory action
+    await getCategory()(categoryDispatch, loadingDispatch)
   };
-
+  // call useeffect when fetchCategory function is successful
   useEffect(() => {
     fetchCategory();
   }, []);

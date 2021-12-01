@@ -1,28 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../common/Button/Button";
-
+import categoryCard from "../../assets/Icons/category.png";
+import "../styles/category.css";
+// define all the required props by the component
 interface Props {
-    categoryInfo : any,
-   
-
+  categoryInfo: any;
+  deleteCategory: any;
+  editCategory: any;
 }
-export const DisplayCategory: React.FC<Props> = ({categoryInfo}) =>{
+export const DisplayCategory: React.FC<Props> = ({
+  categoryInfo,
+  deleteCategory,
+  editCategory,
+}) => {
+  const [category, setCategory] = useState<any>();
 
-    console.log(typeof categoryInfo, "info, category info")
-    // JSON.stringify(categoryInfo)
-    return(
-        <div className = "display-category-container">
-           
-         <div className = "display-category">
-             {categoryInfo && categoryInfo.length>0 && (
-                 categoryInfo?.map((item: any)=>(
-                    <p id = {"display-category-name"}>{item.name}</p>
-                ))
-             )}
-            
+  // function when on delete button is called
+  const onDelete = (index: number) => {
+    deleteCategory(categoryInfo[index]?._id);
+  };
+  // function for when onedit button is called
+  const onEdit = (index: number) => {
+    editCategory(categoryInfo[index]?._id);
+  };
 
-            {/* <p>category name is : {categoryInfo.name}</p> */}
-        </div> 
-        </div>
-    )
-}
+  return (
+    <div className="display-category-container">
+      <div className="display-category">
+        {/* checking if category info exists */}
+        {categoryInfo &&
+          // checking the length of the category length
+          categoryInfo.length > 0 &&
+          //   mapping category info
+          categoryInfo?.map((item: any, index: number) => (
+            <div className="category-card-div">
+              {/* product image */}
+              <img
+                className="category-card"
+                src={categoryCard}
+                alt="category card"
+              />
+              {/* display category name */}
+              <p id={"display-category-name"}>
+                <b>{item.name}</b>
+              </p>
+
+              <div className="buttons-div">
+                {/* Button for editing category */}
+                <Button
+                  id="edit-category-button"
+                  value="Edit"
+                  handleClick={() => onEdit(index)}
+                />
+                {/* Button for deleting category */}
+                <Button
+                  id="delete-product-button"
+                  value="Delete"
+                  handleClick={() => onDelete(index)}
+                />
+              </div>
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+};

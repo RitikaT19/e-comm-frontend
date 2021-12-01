@@ -6,22 +6,30 @@ import { API_URL } from "./serverConnection";
 import { Actions } from "../reducers/sign-up";
 import React from "react";
 
+// function for add user
 export const addUser =
   (data: any) =>
+  // action creator
   async (
     dispatch: React.Dispatch<Actions>,
     loadingDispatch: React.Dispatch<LoadingActions>
   ) => {
     try {
+      // dispatxh start loading
       startLoading(loadingDispatch);
+      // get result rom API
       const result = await axios.post(`${API_URL}/auth/admin/sign_up`, data);
+      //  dispatch stop loading
       stopLoading(loadingDispatch);
+      // dispatch result
       dispatch({
         type: SIGN_UP,
         payload: result.data.message,
       });
     } catch (error: any) {
+      // dispatch stop loading in case of error
       stopLoading(loadingDispatch);
+      // dispatch error data
       dispatch({
         type: SIGN_UP_ERROR,
         payload: error.response

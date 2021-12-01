@@ -2,34 +2,47 @@ import React, { useState } from "react";
 import Button from "../common/Button/Button";
 import { Textfield } from "../common/Textfield/Textfield";
 import "../styles/sign-up.css";
-import background from "../../assets/Icons/background.jpg"
+import background from "../../assets/Icons/background.jpg";
 
+// define interface for the required props by the component
 interface Props {
   handleSignUpButton: any;
-  errorMessage: any,
-  successMessage: any,
+  errorMessage: any;
+  successMessage: any;
 }
-export const SignUp: React.FC<Props> = ({ handleSignUpButton, errorMessage,
-  successMessage }) => {
+export const SignUp: React.FC<Props> = ({
+  handleSignUpButton,
+  errorMessage,
+  successMessage,
+}) => {
+  // stores email
   const [email, setEmail] = useState<string>("");
+  // stores password
   const [password, setPassword] = useState<string>("");
+  // stores first name
   const [firstName, setFirstName] = useState<string>("");
+  // stores last name
   const [lastName, setLastName] = useState<string>("");
   // stores empty field error
   const [showEmptyFieldError, setShowEmptyFieldError] = useState(false);
 
+  // function for when clickSignUpButton is called
   const clickSignUpButton = async () => {
+    // if any of the parameter is missing, throw error
     if (!(firstName || lastName || email || password)) {
       setShowEmptyFieldError(true);
     } else {
+      // call handleSignUpButton with data
       await handleSignUpButton({ firstName, lastName, email, password });
     }
   };
   return (
     <div className="sign-up-main-div">
-      <img className ="background" src = {background} alt = "background"/>
+      <img className="background" src={background} alt="background" />
       <div className="textfield-div">
-        <p className = "sign-up-heading">Make a new Admin!</p>
+        {/* heading for making a new admin */}
+        <p className="sign-up-heading">Make a new Admin!</p>
+        {/* input for first name */}
         <Textfield
           label="First name"
           placeholder="Enter first name"
@@ -37,7 +50,7 @@ export const SignUp: React.FC<Props> = ({ handleSignUpButton, errorMessage,
           onChange={(e: any) => setFirstName(e.target.value)}
           value={firstName}
         />
-
+        {/* input for last name */}
         <Textfield
           label="Last name"
           placeholder="Enter last name"
@@ -45,6 +58,7 @@ export const SignUp: React.FC<Props> = ({ handleSignUpButton, errorMessage,
           onChange={(e: any) => setLastName(e.target.value)}
           value={lastName}
         />
+        {/* input for email */}
         <Textfield
           label="Email"
           placeholder="Enter email address"
@@ -52,7 +66,7 @@ export const SignUp: React.FC<Props> = ({ handleSignUpButton, errorMessage,
           onChange={(e: any) => setEmail(e.target.value)}
           value={email}
         />
-
+        {/* input for password */}
         <Textfield
           label="Password"
           type="password"
@@ -72,6 +86,7 @@ export const SignUp: React.FC<Props> = ({ handleSignUpButton, errorMessage,
           )
         )}
         <div className="sign_up_button_div">
+          {/* Button for submitting sign up form */}
           <Button
             value="Make Admin"
             id="sign_up_button"

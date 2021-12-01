@@ -10,18 +10,21 @@ interface Props {
   history?: History;
 }
 export const LoginAdmin: React.FC<Props> = (props) => {
+  //rename state and dispatch as loginState and loginDispatch respectively
   const { state: loginState, dispatch: loginDispatch } =
     useContext(LoginContext);
   const { dispatch: loadingDispatch } = useContext(LoadingContext);
 
+  // function for login
   const clickLoginButton = async (email: string, password: string) => {
+    // call signIn action
     await signIn(
       email,
       password,
       props?.history
     )(loginDispatch, loadingDispatch).then(() => {
+      // storing login email and password in local storage
       localStorage.setItem("login", JSON.stringify({ email, password }));
-      console.log("details", email, password);
     });
   };
   return (

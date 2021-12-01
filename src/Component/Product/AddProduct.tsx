@@ -20,10 +20,15 @@ export const AddProduct: React.FC<Props> = ({ CrossIconClick,
   // allCategories, 
   submitProduct, 
  }) => {
+  // stores name
   const [name, setName] = useState<string>("");
+  // stores price
   const [price, setPrice] = useState<number>();
+  // stores quantity
   const [quantity, setQuantity] = useState<number>();
+  // stores description
   const [description, setDescription] = useState<string>("");
+  // stores category
   const [category, setCategory] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("")
 

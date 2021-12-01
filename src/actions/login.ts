@@ -7,31 +7,40 @@ import React from "react";
 import axios from "axios";
 import { History } from "history";
 
+// function for sign in
 export const signIn =
+// getting all the parameters
   (email: string, password: string ,history: History | undefined) =>
+  // Action creator
   async (
     dispatch: React.Dispatch<Actions>,
     loadingDispatch: React.Dispatch<LoadingActions>
   ) => {
     try {
-      
+      // dispatch start loading
       startLoading(loadingDispatch);
+      // get result from API
       const result = await axios.post(`${API_URL}/auth/admin/login`, {
         email,
         password,
       });
-      console.log(result, "result")
+      // get token from result
       const token = result.data.result;
+      // store token in local storage
       localStorage.setItem("E_COMM: AUTH_TOKEN", token);
+      // dispatch stop loading
       stopLoading(loadingDispatch);
+      // dispatch toekn and LOGIN type
       dispatch({
         type: LOGIN,
         payload: token,
       });
-      console.log(token, "from axios")
+      // Add authorization header
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      // redirect to /category after sign in
       history?.push("/category");
     } catch (error: any) {
+      // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       dispatch({
         type: LOGIN_ERROR,
