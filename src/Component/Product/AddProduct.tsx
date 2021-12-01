@@ -6,7 +6,6 @@ import "../styles/add-product.css";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import Button from "../common/Button/Button";
-import Select from 'react-select'
 import { DropDown } from "../common/DropDown/DropDown";
 
 

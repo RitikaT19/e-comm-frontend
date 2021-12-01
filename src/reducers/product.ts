@@ -41,7 +41,6 @@ import {
   };
   
   export const Product = (state: State = initialState, action: Actions) => {
-    console.log(action.type, "action product.........bzz")
     switch (action.type) {
       case CREATE_PRODUCT:
         return {
