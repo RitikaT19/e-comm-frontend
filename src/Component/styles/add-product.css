@@ -20,8 +20,9 @@
       align-items: flex-start;
       width: 400px;
   }
-  #add-product-button_element{
+  #add-new-product-button_element{
       margin-top: 10px;
+      
   }
   .close-button{
       margin-left: 500px;
@@ -39,5 +40,6 @@
   }
   .Dropdown-menu{
     width: 40.5%;
-
   }
+  
+ 

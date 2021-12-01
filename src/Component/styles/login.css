@@ -1,5 +1,5 @@
 .login-main-div{
-    margin-top: 100px;
+    /* margin-top: 100px; */
    text-align: -webkit-center;
 }
 #email_element.label {
@@ -9,4 +9,15 @@
 }
 .login_button_div{
     margin-top:15px;
+}
+.login-heading{
+    font-weight: bold;
+}
+.textfield-div{
+    margin-top: -660px;
+    position: relative;
+}
+.background{
+    width:100%;
+    position: relative;
 }

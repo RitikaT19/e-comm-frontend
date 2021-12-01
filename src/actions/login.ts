@@ -30,7 +30,7 @@ export const signIn =
       });
       console.log(token, "from axios")
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-      history?.push("/home");
+      history?.push("/category");
     } catch (error: any) {
       stopLoading(loadingDispatch);
       dispatch({
@@ -48,11 +48,11 @@ export const signIn =
       // Remove the JWT token, idle limit and encryption key from the local storage
       localStorage.clear();
       // Reload the application from the index
-      window.location.href = "/dashboard";
+      window.location.href = "/login";
     } catch (err) {
       // In case of errors, log the response and move the user to the Error page
       console.log(err);
-      window.location.href = "/dashboard";
+      window.location.href = "/login";
     }
   };
   

@@ -20,8 +20,8 @@ export const SideBar: React.FC = () => {
         <NavLink exact className="active_class" to="/product">
           Product
         </NavLink>
-        <NavLink exact className="active_class" to="/home">
-          Home
+        <NavLink exact className="active_class" to="/sign-up">
+          Make admin
         </NavLink>
         <div className = "sidebar-logout-button">
         <LogoutButton

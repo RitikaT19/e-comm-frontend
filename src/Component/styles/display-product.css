@@ -1,0 +1,36 @@
+.product-card{
+  width: 200px;
+  margin-left: 10px;
+  display:inline-table;
+  margin-top: 20px;
+  box-shadow: 0 2px 20px rgb(0 0 0 / 10%);
+  background-color: rgb(255, 255, 255);
+  padding: 15px 15px 15px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 10px;
+  overflow: hidden;
+}
+.list-product-details{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  margin-left: 100px;
+}
+#product-name{
+  font-weight: bold;
+}
+.image {
+  margin-left: 120px;
+  width: 60px;
+  justify-self: center;
+}
+.buttons-div{
+  display: flex;
+  margin-bottom: 5px;
+}
+#delete-product-button_element{
+  margin-left: 5px;
+}
+

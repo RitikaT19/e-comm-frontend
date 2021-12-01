@@ -6,8 +6,6 @@ import { SignUpContextProvider } from "./contexts/SignUp";
 import { LoginContextProvider } from "./contexts/Login";
 import { SignUpAdmin } from "./component/Sign-up";
 import { LoginAdmin } from "./component/Login";
-import { Dashboard } from "./component/Dashboard";
-import { Home } from "./component/HomePage";
 import { CategoryProvider } from "./contexts/Category";
 import {Category} from "./component/Category"
 import axios from "axios";
@@ -28,10 +26,8 @@ function App() {
               <ProductContextProvider>
               <Router>
                 <Switch>
+                <Route path="/login" component={LoginAdmin} />
                   <Route path="/sign-up" component={SignUpAdmin} />
-                  <Route path="/login" component={LoginAdmin} />
-                  <Route path="/dashboard" component={Dashboard} />
-                  <Route path="/home" component={Home} />
                   <Route path="/category" component={Category} />
                   <Route path = "/product" component={Product}/>
                 </Switch>

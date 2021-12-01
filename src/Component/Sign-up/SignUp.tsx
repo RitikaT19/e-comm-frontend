@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../common/Button/Button";
 import { Textfield } from "../common/Textfield/Textfield";
 import "../styles/sign-up.css";
+import background from "../../assets/Icons/background.jpg"
 
 interface Props {
   handleSignUpButton: any;
@@ -26,7 +27,9 @@ export const SignUp: React.FC<Props> = ({ handleSignUpButton, errorMessage,
   };
   return (
     <div className="sign-up-main-div">
+      <img className ="background" src = {background} alt = "background"/>
       <div className="textfield-div">
+        <p className = "sign-up-heading">Make a new Admin!</p>
         <Textfield
           label="First name"
           placeholder="Enter first name"
@@ -70,7 +73,7 @@ export const SignUp: React.FC<Props> = ({ handleSignUpButton, errorMessage,
         )}
         <div className="sign_up_button_div">
           <Button
-            value="Sign up"
+            value="Make Admin"
             id="sign_up_button"
             handleClick={clickSignUpButton}
           />

@@ -7,20 +7,27 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 import Button from "../common/Button/Button";
 import Select from 'react-select'
+import { DropDown } from "../common/DropDown/DropDown";
 
 
 interface Props {
   CrossIconClick: any;
   submitProduct: any;
+  // allCategories: Array<any>
 }
 
-export const AddProduct: React.FC<Props> = ({ CrossIconClick, submitProduct }) => {
+export const AddProduct: React.FC<Props> = ({ CrossIconClick,
+  // allCategories, 
+  submitProduct, 
+ }) => {
   const [name, setName] = useState<string>("");
   const [price, setPrice] = useState<number>();
   const [quantity, setQuantity] = useState<number>();
   const [description, setDescription] = useState<string>("");
   const [category, setCategory] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string>("")
 
+  const handleCategoryDropdown = () =>{}
   
   return (
     <div className="add-product-main-container">
@@ -61,17 +68,18 @@ export const AddProduct: React.FC<Props> = ({ CrossIconClick, submitProduct }) =
           onChange={(e: any) => setDescription(e.target.value)}
         />
         {/* Dropdown list for category options */}
-        <select
-        className = "add-product-category"
-        value = {category}
-        onChange ={(e) =>setCategory(e.target.value)}
-        >
-          <option>Select Category</option>
-          
-        </select>
+       {/* <DropDown
+       label = "Select category"
+       options = {allCategories}
+       id = "category-dropdown"
+       value = {selectedCategory}
+       showLabel = {false}
+       handleChange = {handleCategoryDropdown}
+       noOptionsText={"No category found"}
+       /> */}
         {/* Submit button for adding product */}
         <Button
-        id="add-product-button"
+        id="add-new-product-button"
         value="Add Product"
         handleClick={submitProduct}
       />

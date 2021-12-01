@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../common/Button/Button";
 import { Textfield } from "../common/Textfield/Textfield";
 import "../styles/login.css";
+import background from "../../assets/Icons/background.jpg"
 
 interface Props {
   handleLoginButton: any;
@@ -26,7 +27,9 @@ export const Login: React.FC<Props> = ({ handleLoginButton, errorMessage, succes
 
   return (
     <div className="login-main-div">
+       <img className ="background" src = {background} alt = "background"/>
       <div className="textfield-div">
+      <p className = "login-heading">Welcome back! Login!</p>
         <Textfield
           label="Email"
           placeholder="Enter email address"

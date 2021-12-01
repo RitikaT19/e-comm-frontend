@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SideBar } from "../common/SideBar/Sidebar";
-import { Container } from "../common/WhiteContainer/Container";
 import { getProduct, createProduct } from "../../actions/product";
 import { ProductContext } from "../../contexts/Product";
 import { LoadingContext } from "../../contexts/Loading";
 import { DisplayProduct } from "./DisplayProduct";
 import { AddProduct } from "./AddProduct";
-import { AddButton } from "../common/AddButton/AddButton";
+import "../styles/product.css"
+import Button from "../common/Button/Button";
 
 export const Product: React.FC = () => {
   const { state: productState, dispatch: productDispatch } =
@@ -24,36 +24,42 @@ export const Product: React.FC = () => {
   useEffect(() => {
     fetchProduct();
   }, []);
-  
+
   // function for toggling add product page
   const addProductToggle = () => {
     setShowProductPage(!showProductPage);
   };
 
   // function for adding a new product
-  const addProduct = async(data: any) =>{
-    await createProduct(data)(productDispatch, loadingDispatch).then(()=>{
-      console.log(productState.createProductSuccess, "add product from index")
-    })
+  const addProduct = async (data: any) => {
+    await createProduct(data)(productDispatch, loadingDispatch).then(() => {
+      console.log(productState.createProductSuccess, "add product from index");
+    });
     fetchProduct();
-  }
+  };
+
+  const allCategories = () =>{}
   return (
     <>
       <SideBar />
-      <Container>
-        <AddButton
-        addIconClick = {addProductToggle}
-        addText = "Add Product"
-        />
+      
+        <div className = "actionButton">
+        <p className="add-product-heading">Products</p>
+        <Button
+        id = "add-product-button"
+        value="Add Product"
+        handleClick = {addProductToggle}/>
+        </div>
         {showProductPage ? (
-          <AddProduct CrossIconClick={addProductToggle} 
-          submitProduct = {addProduct}/>
-        ) : (
-          <DisplayProduct
-            productDetails={productState.fetchProductSuccess}
+          <AddProduct
+            CrossIconClick={addProductToggle}
+            submitProduct={addProduct}
+            // allCategories = {allCategories}
           />
+        ) : (
+          <DisplayProduct productDetails={productState.fetchProductSuccess} />
         )}
-      </Container>
+      
     </>
   );
 };

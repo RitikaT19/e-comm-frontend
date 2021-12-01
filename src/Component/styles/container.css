@@ -2,7 +2,7 @@
     height: auto;
     min-height: calc(100vh - 120px);
     border-radius: 10px;
-    background-color: #fff;
+    background-color: black;
     margin: 15px 15px 15px 15px;
     display: flex;
     flex-direction: column;
@@ -10,8 +10,8 @@
     align-items: flex-start;
     padding: 10px;
     position: relative;
-    /* box-shadow: 0 2px 20px rgb(0 0 0 / 14%); */
-    background-color:rgb(211, 209, 209);
+    box-shadow: 0 2px 20px rgb(0 0 0 / 34%);
+    background-color:rgb(233, 230, 230);
   }
   @media only screen and (max-width: 500px) {
     .container-body {

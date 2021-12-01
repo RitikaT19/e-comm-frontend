@@ -3,7 +3,7 @@ import { SignUp } from "./SignUp";
 import { LoadingContext } from "../../contexts/Loading";
 import { SignUpContext } from "../../contexts/SignUp";
 import { addUser, clearErrors } from "../../actions/signUp";
-import { Navbar } from "../common/Navbar/Navbar";
+import { SideBar } from "../common/SideBar/Sidebar";
 
 export const SignUpAdmin: React.FC = () => {
   const { state: signUpState, dispatch: signUpDispatch } =
@@ -18,7 +18,7 @@ export const SignUpAdmin: React.FC = () => {
   };
   return (
     <div>
-      <Navbar />
+      <SideBar />
       <SignUp
         handleSignUpButton={clickSignUpButton}
         errorMessage={signUpState.error}

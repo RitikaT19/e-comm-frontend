@@ -1,5 +1,5 @@
 .sidebar-main-div{
-    background-color: black;
+    background-color: rgb(5, 5, 71);
     color: white;
     display: flex;
     height: 50px;
@@ -11,7 +11,7 @@
     }
     .active_class{
         color: grey;
-        margin-left: 40px;
+        margin-left:20px;
         text-decoration: none;
     }
     .dashboard{
@@ -20,11 +20,11 @@
     }
     #sidebar_buttons{
         margin-top: 10px;
-        margin-left: 650px;
+        margin-left: 600px;
         display:block;
         /* display: inline-block; */
     }
     .sidebar-logout-button{
-       margin-left: 350px;
+       margin-left: 390px;
        
     }
