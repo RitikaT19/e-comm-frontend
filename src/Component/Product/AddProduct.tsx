@@ -4,15 +4,17 @@ import { TextArea } from "../common/TextArea/TextArea";
 import { Textfield } from "../common/Textfield/Textfield";
 import "../styles/add-product.css";
 import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
+import Select from "react-select";
 import Button from "../common/Button/Button";
 import { DropDown } from "../common/DropDown/DropDown";
 import { Loading } from "../common/Loading/Loading";
+import 'react-dropdown/style.css';
 
 interface Props {
   CrossIconClick: any;
   submitProduct: any;
   showLoader: boolean;
+  // categoryNames: any
   // allCategories: Array<any>
 }
 
@@ -21,6 +23,7 @@ export const AddProduct: React.FC<Props> = ({
   // allCategories,
   submitProduct,
   showLoader,
+  
 }) => {
   // stores name
   const [name, setName] = useState<string>("");
@@ -33,9 +36,18 @@ export const AddProduct: React.FC<Props> = ({
   // stores category
   const [category, setCategory] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
+  const[selectCategoryId, setSelectCategory] = useState<string>("")
 
   const handleCategoryDropdown = () => {};
+  // const allCategories = {}
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
 
+  ]
+ 
+  
   return (
     <div>
       {showLoader ? (
@@ -79,15 +91,20 @@ export const AddProduct: React.FC<Props> = ({
               onChange={(e: any) => setDescription(e.target.value)}
             />
             {/* Dropdown list for category options */}
-            {/* <DropDown
-       label = "Select category"
-       options = {allCategories}
-       id = "category-dropdown"
-       value = {selectedCategory}
-       showLabel = {false}
-       handleChange = {handleCategoryDropdown}
-       noOptionsText={"No category found"}
-       /> */}
+           {/* <DropDown
+           label = "Categories"
+           id = "category-drop-down"
+           options = {options}
+           showLabel = {true}
+           handleChange = {handleCategoryDropdown}/> */}
+           <div className = "dropdown">
+           <Select
+           placeholder = "Select category"
+           options = {options}
+           value = {{label:selectedCategory, value:selectedCategory}}
+           onChange = {(e:any) =>setSelectedCategory(e.value)}
+           />
+           </div>
             {/* Submit button for adding product */}
             <Button
               id="add-new-product-button"

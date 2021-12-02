@@ -8,11 +8,12 @@ import {
   FETCH_PRODUCT_ERROR,
   DELETE_PRODUCT,
   DELETE_PRODUCT_ERROR,
+  UPDATE_PRODUCT,
+  UPDATE_PRODUCT_ERROR,
 } from "./Types";
 import { API_URL } from "./serverConnection";
 import { Actions } from "../reducers/product";
 import React from "react";
-import { resourceLimits } from "worker_threads";
 
 // function for creating product
 export const createProduct =
@@ -105,6 +106,37 @@ export const removeProduct =
       // dispatch the error data
       dispatch({
         type: DELETE_PRODUCT_ERROR,
+        payload: error.response
+          ? error.response.data
+          : "Failed to connect with the server",
+      });
+    }
+  };
+
+// function for editing product
+export const editProduct =
+  (data: any) =>
+  async (
+    // action creator
+    dispatch: React.Dispatch<Actions>,
+    loadingDispatch: React.Dispatch<LoadingActions>
+  ) => {
+    try {
+      // dispatch start loading
+      startLoading(loadingDispatch);
+      // get result from the API
+      const result = await axios.put(`${API_URL}/product/`, data);
+      // dispatch stop loading
+      stopLoading(loadingDispatch);
+      // dispatch result
+      dispatch({
+        type: UPDATE_PRODUCT,
+        payload: result.data,
+      });
+    } catch (error: any) {
+      // dispatch error data
+      dispatch({
+        type: UPDATE_PRODUCT_ERROR,
         payload: error.response
           ? error.response.data
           : "Failed to connect with the server",

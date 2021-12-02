@@ -24,11 +24,20 @@ export const Category: React.FC = () => {
   const [showDisplayCategoryLoader, setDisplayCategoryShowLoader] = useState(false)
   // flag for display category loader
   const [showAddCategoryLoader, setAddCategoryShowLoader] = useState(false)
+  // stores the state for edit category flag
+  const [editCategoryData, setEditCategoryData] = useState<boolean>(false)
+  // stored the detail of a single category
+  const [categoryData, setCategoryData] = useState<any>()
   
   
   // toggle function for showing add category page
   const addCategoryToggle = () => {
+    // toggles add category page
     setShowAddCategoryPage(!showAddCategoryPage);
+    // sets edit flag as false
+    setEditCategoryData(false)
+    // sets category data as empty
+    setCategoryData({});
   };
 
   // function for fetching category
@@ -54,6 +63,7 @@ export const Category: React.FC = () => {
     });
     // call fetchCategory everytime after a new category is added
     fetchCategory();
+    setShowAddCategoryPage(false)
   };
 
   // function for deleting a category
@@ -64,7 +74,26 @@ export const Category: React.FC = () => {
     fetchCategory();
   };
 
-  const updateCategory = {};
+  // function for updating category
+  const updateCategory = async(data: any) =>{
+    setAddCategoryShowLoader(true)
+    // call action editCategory
+    await editCategory(data)(categoryDispatch, loadingDispatch).then(()=>(
+    setAddCategoryShowLoader(false)
+    ))
+    fetchCategory()
+    setShowAddCategoryPage(false)
+  };
+
+  const updateCategoryIconClick = (data: any) =>{
+    // sets the category detail for the card clicked
+    setCategoryData(data);
+    // sets the setShowAddCategoryPage true 
+    setShowAddCategoryPage(true)
+    // sets the edit flag true
+    setEditCategoryData(true)
+    
+  }
   return (
     <div className="category-main-div">
       <SideBar />
@@ -85,14 +114,16 @@ export const Category: React.FC = () => {
           <AddCategory
             CrossIconClick={addCategoryToggle}
             handleAddCategory={addCategory}
-            editMode={false}
+            isEdit = {editCategoryData}
             showLoader = {showAddCategoryLoader}
+            categoryDetail = {categoryData}
+            handleEditCategory = {updateCategory}
           />
         ) : (
           <DisplayCategory
             categoryInfo={categoryState.fetchCategorySuccess}
             deleteCategory={removeCategory}
-            editCategory={updateCategory}
+            updateCategoryIconClick={updateCategoryIconClick}
             showLoader = {showDisplayCategoryLoader}
           />
         )}

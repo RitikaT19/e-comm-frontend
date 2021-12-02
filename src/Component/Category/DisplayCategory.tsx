@@ -7,13 +7,13 @@ import { Loading } from "../common/Loading/Loading";
 interface Props {
   categoryInfo: any;
   deleteCategory: any;
-  editCategory: any;
+  updateCategoryIconClick: any;
   showLoader: boolean;
 }
 export const DisplayCategory: React.FC<Props> = ({
   categoryInfo,
   deleteCategory,
-  editCategory,
+  updateCategoryIconClick,
   showLoader,
 }) => {
   const [category, setCategory] = useState<any>();
@@ -23,9 +23,10 @@ export const DisplayCategory: React.FC<Props> = ({
     deleteCategory(categoryInfo[index]?._id);
   };
   // function for when onedit button is called
-  const onEdit = (index: number) => {
-    editCategory(categoryInfo[index]?._id);
-  };
+  // const onEdit = (item: any) => {
+  //   setCategory(item)
+  //   updateCategoryIconClick(categoryInfo[index]?._id);
+  // };
 
   return (
     <div>
@@ -57,7 +58,7 @@ export const DisplayCategory: React.FC<Props> = ({
                     <Button
                       id="edit-category-button"
                       value="Edit"
-                      handleClick={() => onEdit(index)}
+                      handleClick={() => updateCategoryIconClick(item)}
                     />
                     {/* Button for deleting category */}
                     <Button

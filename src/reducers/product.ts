@@ -5,6 +5,8 @@ import {
   FETCH_PRODUCT_ERROR,
   DELETE_PRODUCT,
   DELETE_PRODUCT_ERROR,
+  UPDATE_PRODUCT,
+  UPDATE_PRODUCT_ERROR,
 } from "../actions/Types";
 
 export type Actions =
@@ -31,6 +33,14 @@ export type Actions =
   | {
       type: typeof DELETE_PRODUCT_ERROR;
       payload: string;
+    }
+  | {
+      type: typeof UPDATE_PRODUCT;
+      payload: string;
+    }
+  | {
+      type: typeof UPDATE_PRODUCT_ERROR;
+      payload: string;
     };
 
 interface ProductInterface {
@@ -39,8 +49,10 @@ interface ProductInterface {
   createProductError: string | null;
   fetchProductSuccess: any;
   fetchProductError: string | null;
-  deleteProductSuccess: string|null;
-  deleteProductError: string|null;
+  deleteProductSuccess: string | null;
+  deleteProductError: string | null;
+  updateProductSuccess: string | null;
+  updateProductError: string | null;
 }
 export type State = ProductInterface;
 
@@ -52,7 +64,8 @@ export const initialState: State = {
   fetchProductSuccess: [],
   deleteProductSuccess: null,
   deleteProductError: null,
-
+  updateProductSuccess: null,
+  updateProductError: null,
 };
 
 export const Product = (state: State = initialState, action: Actions) => {
@@ -80,15 +93,26 @@ export const Product = (state: State = initialState, action: Actions) => {
           : "Unable to fetch the Product at the moment",
       };
     case DELETE_PRODUCT:
-      return{
+      return {
         ...state,
         deleteProductSuccess: action.payload,
-      }
+      };
     case DELETE_PRODUCT_ERROR:
-      return{
+      return {
         ...state,
         deleteProductError: action.payload,
-      }
+      };
+    case UPDATE_PRODUCT:
+      return {
+        ...state,
+        updateProductSuccess: action.payload,
+      };
+    case UPDATE_PRODUCT_ERROR:
+      return {
+        ...state,
+        updateProductError: action.payload,
+      };
+
     default:
       return state;
   }

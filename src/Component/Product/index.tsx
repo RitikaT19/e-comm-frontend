@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SideBar } from "../common/SideBar/Sidebar";
 import { getProductById, createProduct, removeProduct } from "../../actions/product";
+import {getCategory} from "../../actions/category"
+import {CategoryContext} from "../../contexts/Category"
 import { ProductContext } from "../../contexts/Product";
 import { LoadingContext } from "../../contexts/Loading";
 import { DisplayProduct } from "./DisplayProduct";
@@ -15,6 +17,9 @@ export const Product: React.FC = () => {
   //rename state and dispatch as productState and productDispatch respectively
   const { state: productState, dispatch: productDispatch } =
     useContext(ProductContext);
+  //rename state and dispatch as categoryState and categoryDispatch respectively
+  const { state: categoryState, dispatch: categoryDispatch } =
+    useContext(CategoryContext);
   const { dispatch: loadingDispatch } = useContext(LoadingContext);
   // flag for showing add product page
   const [showProductPage, setShowProductPage] = useState(false);
@@ -55,12 +60,19 @@ export const Product: React.FC = () => {
   };
 
   // function for deleting product
-  const deleteProduct = async(id: any) =>{
+  const deleteProduct = async(id: any, category: any) =>{
     // call removeProduct action
     await removeProduct(id)(productDispatch, loadingDispatch);
     // call the fetchProducts after deleting a product
-    fetchProducts(id);
+    fetchProducts(category);
   }
+
+  // function for fetching category
+  const fetchCategory = async () => {
+    // call getCategory action
+    await getCategory()(categoryDispatch, loadingDispatch).then(()=>{
+    });
+  };
 
   const allCategories = () => {};
   return (
@@ -80,10 +92,12 @@ export const Product: React.FC = () => {
           CrossIconClick={addProductToggle}
           submitProduct={addProduct}
           showLoader = {showAddProductLoader}
+          // categoryNames = {categoryState.fetchCategorySuccess}
           // allCategories = {allCategories}
         />
       ) : (
-        <DisplayProduct productDetails={productState.fetchProductSuccess}
+        <DisplayProduct 
+        productDetails={productState.fetchProductSuccess}
         deleteProduct = {deleteProduct}
         showLoader = {showDisplayProductLoader} />
       )}

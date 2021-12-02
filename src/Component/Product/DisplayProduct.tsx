@@ -15,9 +15,11 @@ export const DisplayProduct: React.FC<Props> = ({
   deleteProduct,
   showLoader,
 }) => {
-  const editProduct = {};
+  const editProduct = async(item: any) =>{
+    
+  };
   const onDeleteProduct = async (index: number) => {
-    deleteProduct(productDetails[index]?._id);
+    deleteProduct(productDetails[index]?._id, productDetails[index]?.category);
   };
   return (
     <div>
@@ -60,7 +62,7 @@ export const DisplayProduct: React.FC<Props> = ({
                         <Button
                           id="edit-product-button"
                           value="Edit"
-                          handleClick={editProduct}
+                          handleClick={()=>editProduct(item)}
                         />
                         {/* product for deleting category */}
                         <Button
