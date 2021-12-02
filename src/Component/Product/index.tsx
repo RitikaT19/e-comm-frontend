@@ -54,9 +54,12 @@ export const Product: React.FC = () => {
     // call createProduct action
     await createProduct(data)(productDispatch, loadingDispatch).then(()=>{
       setShowAddProductLoader(false)
+      
     });
+    
     // call fetchProducts after adding a new product
     fetchProducts(id);
+    setShowProductPage(false)
   };
 
   // function for deleting product
@@ -92,7 +95,7 @@ export const Product: React.FC = () => {
           CrossIconClick={addProductToggle}
           submitProduct={addProduct}
           showLoader = {showAddProductLoader}
-          // categoryNames = {categoryState.fetchCategorySuccess}
+          categoryNames = {categoryState.fetchCategorySuccess}
           // allCategories = {allCategories}
         />
       ) : (

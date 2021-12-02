@@ -9,7 +9,7 @@ import { Loading } from "../common/Loading/Loading";
 interface Props {
   handleAddCategory: any;
   CrossIconClick: any;
-  isEdit: any;
+  isEdit: boolean;
   showLoader: boolean;
   categoryDetail: any;
   handleEditCategory: any;
