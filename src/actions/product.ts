@@ -6,73 +6,108 @@ import {
   CREATE_PRODUCT_ERROR,
   FETCH_PRODUCT,
   FETCH_PRODUCT_ERROR,
+  DELETE_PRODUCT,
+  DELETE_PRODUCT_ERROR,
 } from "./Types";
 import { API_URL } from "./serverConnection";
 import { Actions } from "../reducers/product";
 import React from "react";
+import { resourceLimits } from "worker_threads";
 
 // function for creating product
-  export const createProduct = (data: any) =>
-  async(
+export const createProduct =
+  (data: any) =>
+  async (
     // Action creator
     dispatch: React.Dispatch<Actions>,
     loadingDispatch: React.Dispatch<LoadingActions>
-  ) =>{
-    try{
+  ) => {
+    try {
       // dispatch start loading
       startLoading(loadingDispatch);
       // get result from API
-      const result = await axios.post(`${API_URL}/product/`,data)
+      const result = await axios.post(`${API_URL}/product/`, data);
       // dispatch stop loading
-      stopLoading(loadingDispatch)
+      stopLoading(loadingDispatch);
       // dispatch result
       dispatch({
         type: CREATE_PRODUCT,
-        payload: result.data
-      })
-
-    }catch(error: any){
+        payload: result.data,
+      });
+    } catch (error: any) {
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       dispatch({
         type: CREATE_PRODUCT_ERROR,
-        payload: error.response?error.response.data?.message
-        :"Failed to connect with the server"
-      })
+        payload: error.response
+          ? error.response.data?.message
+          : "Failed to connect with the server",
+      });
     }
-  }
+  };
 
 // function for getting product by id
-export const getProductById = (id: string) => 
-async (
-  // action creator
+export const getProductById =
+  (id: string) =>
+  async (
+    // action creator
     dispatch: React.Dispatch<Actions>,
     loadingDispatch: React.Dispatch<LoadingActions>
-)=>{
-    try{
+  ) => {
+    try {
       // dispatch start loading
-        startLoading(loadingDispatch)
-        // get result from API
-        const result = await axios.get(`${API_URL}/product/${id}`)
-        // dispatch stop loading
-        stopLoading(loadingDispatch);
+      startLoading(loadingDispatch);
+      // get result from API
+      const result = await axios.get(`${API_URL}/product/${id}`);
+      // dispatch stop loading
+      stopLoading(loadingDispatch);
 
-        // dispatch result
-        dispatch({
-            type: FETCH_PRODUCT,
-            payload: result.data.data
-        })
-        
-    }catch(error: any){
+      // dispatch result
+      dispatch({
+        type: FETCH_PRODUCT,
+        payload: result.data.data,
+      });
+    } catch (error: any) {
       // dispatch stop loading in case of error
-        stopLoading(loadingDispatch)
-        // dispatch error data
-        dispatch({
-            type: FETCH_PRODUCT_ERROR,
-            payload: error.response
-            ?error.response.data
-            : "Failed to connect with the server"
-        })
+      stopLoading(loadingDispatch);
+      // dispatch error data
+      dispatch({
+        type: FETCH_PRODUCT_ERROR,
+        payload: error.response
+          ? error.response.data
+          : "Failed to connect with the server",
+      });
     }
-}
+  };
 
+// function for deleting product
+export const removeProduct =
+  (id: any) =>
+  async (
+    // action creator
+    dispatch: React.Dispatch<Actions>,
+    loadingDispatch: React.Dispatch<LoadingActions>
+  ) => {
+    try {
+      // dispatch start loading
+      startLoading(loadingDispatch);
+      const result = await axios.delete(`${API_URL}/product/` + id);
+      // dispatch stop loading
+      stopLoading(loadingDispatch);
+      // dispatch result with DELETE_PRODUCT type
+      dispatch({
+        type: DELETE_PRODUCT,
+        payload: result.data,
+      });
+    } catch (error: any) {
+      // in case of error, dispatch stop loading
+      stopLoading(loadingDispatch);
+      // dispatch the error data
+      dispatch({
+        type: DELETE_PRODUCT_ERROR,
+        payload: error.response
+          ? error.response.data
+          : "Failed to connect with the server",
+      });
+    }
+  };

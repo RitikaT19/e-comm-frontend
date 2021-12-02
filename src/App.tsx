@@ -26,10 +26,10 @@ function App() {
               <ProductContextProvider>
               <Router>
                 <Switch>
-                <Route path="/login" component={LoginAdmin} />
-                  <Route path="/sign-up" component={SignUpAdmin} />
-                  <Route path="/category" component={Category} />
-                  <Route path = "/product/:id" component={Product}/>
+                <Route exact path="/" component={LoginAdmin} />
+                  <Route exact path="/sign-up" component={SignUpAdmin} />
+                  <Route exact path="/category" component={Category} />
+                  <Route exact path = "/product/:id" component={Product}/>
                 </Switch>
               </Router>
               </ProductContextProvider>

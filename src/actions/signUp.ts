@@ -39,11 +39,9 @@ export const addUser =
     }
   };
 
-
-  export const clearErrors = (dispatch: React.Dispatch<Actions>) => {
-    //Dispatch CLEAR_ERRORS type
-    dispatch({
-      type: CLEAR_ERRORS,
-    });
-  };
-  
+export const clearErrors = (dispatch: React.Dispatch<Actions>) => {
+  //Dispatch CLEAR_ERRORS type
+  dispatch({
+    type: CLEAR_ERRORS,
+  });
+};

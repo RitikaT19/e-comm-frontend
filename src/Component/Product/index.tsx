@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SideBar } from "../common/SideBar/Sidebar";
-import { getProductById, createProduct } from "../../actions/product";
+import { getProductById, createProduct, removeProduct } from "../../actions/product";
 import { ProductContext } from "../../contexts/Product";
 import { LoadingContext } from "../../contexts/Loading";
 import { DisplayProduct } from "./DisplayProduct";
@@ -42,6 +42,14 @@ export const Product: React.FC = () => {
     fetchProducts(id);
   };
 
+  // function for deleting product
+  const deleteProduct = async(id: any) =>{
+    // call removeProduct action
+    await removeProduct(id)(productDispatch, loadingDispatch);
+    // call the fetchProducts after deleting a product
+    fetchProducts(id);
+  }
+
   const allCategories = () => {};
   return (
     <>
@@ -62,7 +70,8 @@ export const Product: React.FC = () => {
           // allCategories = {allCategories}
         />
       ) : (
-        <DisplayProduct productDetails={productState.fetchProductSuccess} />
+        <DisplayProduct productDetails={productState.fetchProductSuccess}
+        deleteProduct = {deleteProduct} />
       )}
     </>
   );

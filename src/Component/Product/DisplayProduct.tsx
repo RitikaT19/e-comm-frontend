@@ -6,10 +6,13 @@ import "../styles/display-product.css";
 // define required props by the component
 interface Props {
   productDetails: any;
+  deleteProduct: any
 }
-export const DisplayProduct: React.FC<Props> = ({ productDetails }) => {
+export const DisplayProduct: React.FC<Props> = ({ productDetails, deleteProduct}) => {
   const editProduct = {};
-  const deleteProduct = {};
+  const onDeleteProduct = async(index: number)=>{
+    deleteProduct(productDetails[index]?._id)
+  };
   return (
     <div className="display-product-main-container">
       <div>
@@ -35,13 +38,9 @@ export const DisplayProduct: React.FC<Props> = ({ productDetails }) => {
                   </p>
                   {/* product description */}
                   <p id={"display-category-description"}>
-                    <b>Description:</b>
+                    <b>Description: </b>
                     {item.description}
                   </p>
-                  {/* <p id={"display-category-category"}>
-                    <b>Category:</b>
-                    {item.category}
-                  </p> */}
                   <div className="buttons-div">
                     {/* Button for editing product */}
                     <Button
@@ -53,7 +52,7 @@ export const DisplayProduct: React.FC<Props> = ({ productDetails }) => {
                     <Button
                       id="delete-product-button"
                       value="Delete"
-                      handleClick={deleteProduct}
+                      handleClick={()=>onDeleteProduct(index)}
                     />
                   </div>
                 </div>
