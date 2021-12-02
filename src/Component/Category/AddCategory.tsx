@@ -3,18 +3,21 @@ import Button from "../common/Button/Button";
 import { Textfield } from "../common/Textfield/Textfield";
 import "../styles/add-category.css";
 import cross from "../../assets/Icons/cross.png";
+import { Loading } from "../common/Loading/Loading";
 
 // Define all the props required by the component
 interface Props {
   handleAddCategory: any;
   CrossIconClick: any;
-  editMode: any
+  editMode: any;
+  showLoader:boolean;
 }
 
 export const AddCategory: React.FC<Props> = ({
   handleAddCategory,
   CrossIconClick,
-  editMode
+  editMode,
+  showLoader
   
 }) => {
   // stores name
@@ -27,7 +30,12 @@ export const AddCategory: React.FC<Props> = ({
     console.log(name, "name from add category");
   };
   return (
-    <div className="add-category-container">
+    <div>
+      {/* if show loader is true, show loader */}
+      {showLoader ? (
+        <Loading/>
+      ):
+      <div className="add-category-container">
       <div className="add-category-div">
         <div className="close-button">
           {/* cross button */}
@@ -49,5 +57,8 @@ export const AddCategory: React.FC<Props> = ({
         handleClick={submitCategory}
       />
     </div>
+      }
+    </div>
+    
   );
 };

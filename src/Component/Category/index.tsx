@@ -20,26 +20,42 @@ export const Category: React.FC = () => {
   const { dispatch: loadingDispatch } = useContext(LoadingContext);
   // stores flag for showing add category page
   const [showAddCategoryPage, setShowAddCategoryPage] = useState(false);
+  // flag for display category loader
+  const [showDisplayCategoryLoader, setDisplayCategoryShowLoader] = useState(false)
+  // flag for display category loader
+  const [showAddCategoryLoader, setAddCategoryShowLoader] = useState(false)
+  
+  
   // toggle function for showing add category page
   const addCategoryToggle = () => {
     setShowAddCategoryPage(!showAddCategoryPage);
   };
+
   // function for fetching category
   const fetchCategory = async () => {
+    setDisplayCategoryShowLoader(true)
     // call getCategory action
-    await getCategory()(categoryDispatch, loadingDispatch);
+    await getCategory()(categoryDispatch, loadingDispatch).then(()=>{
+      setDisplayCategoryShowLoader(false)
+    });
   };
+
   // call useEffect when fetchCategory function is successful
   useEffect(() => {
     fetchCategory();
   }, []);
+
   // function for adding category
   const addCategory = async (data: string) => {
+    setAddCategoryShowLoader(true)
     // call createNewCategory action
-    await createNewCategory(data)(categoryDispatch, loadingDispatch);
+    await createNewCategory(data)(categoryDispatch, loadingDispatch).then(()=>{
+      setAddCategoryShowLoader(false)
+    });
     // call fetchCategory everytime after a new category is added
     fetchCategory();
   };
+
   // function for deleting a category
   const removeCategory = async (id: any) => {
     // call deleteCategory action
@@ -70,12 +86,14 @@ export const Category: React.FC = () => {
             CrossIconClick={addCategoryToggle}
             handleAddCategory={addCategory}
             editMode={false}
+            showLoader = {showAddCategoryLoader}
           />
         ) : (
           <DisplayCategory
             categoryInfo={categoryState.fetchCategorySuccess}
             deleteCategory={removeCategory}
             editCategory={updateCategory}
+            showLoader = {showDisplayCategoryLoader}
           />
         )}
       </div>

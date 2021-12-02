@@ -18,10 +18,19 @@ export const Product: React.FC = () => {
   const { dispatch: loadingDispatch } = useContext(LoadingContext);
   // flag for showing add product page
   const [showProductPage, setShowProductPage] = useState(false);
+  // flag for add product header
+  const [showAddProductLoader, setShowAddProductLoader] = useState(false);
+  // flag for display product header
+  const [showDisplayProductLoader, setShowDisplayProductLoader] = useState(false);
+  
+
   // function for fetching products
   const fetchProducts = async (id: string) => {
+    setShowDisplayProductLoader(true)
     // call getProductById action
-    await getProductById(id)(productDispatch, loadingDispatch);
+    await getProductById(id)(productDispatch, loadingDispatch).then(() =>{
+      setShowDisplayProductLoader(false)
+    });
   };
 
   // call useeffectt when getProductById is successful
@@ -36,8 +45,11 @@ export const Product: React.FC = () => {
 
   // function for adding a new product
   const addProduct = async (data: any) => {
+    setShowAddProductLoader(true)
     // call createProduct action
-    await createProduct(data)(productDispatch, loadingDispatch);
+    await createProduct(data)(productDispatch, loadingDispatch).then(()=>{
+      setShowAddProductLoader(false)
+    });
     // call fetchProducts after adding a new product
     fetchProducts(id);
   };
@@ -67,11 +79,13 @@ export const Product: React.FC = () => {
         <AddProduct
           CrossIconClick={addProductToggle}
           submitProduct={addProduct}
+          showLoader = {showAddProductLoader}
           // allCategories = {allCategories}
         />
       ) : (
         <DisplayProduct productDetails={productState.fetchProductSuccess}
-        deleteProduct = {deleteProduct} />
+        deleteProduct = {deleteProduct}
+        showLoader = {showDisplayProductLoader} />
       )}
     </>
   );

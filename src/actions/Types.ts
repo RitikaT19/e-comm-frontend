@@ -7,6 +7,9 @@ export const LOGIN_ERROR = "LOGIN_ERROR";
 // start and stop loadinf type
 export const START_LOADING = "START_LOADING";
 export const STOP_LOADING = "STOP_LOADING";
+export const LOAD_SCREEN = "LOAD_SCREEN";
+
+
 
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 // category type

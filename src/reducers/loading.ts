@@ -1,11 +1,16 @@
-import { START_LOADING, STOP_LOADING } from "../actions/Types";
+import { START_LOADING, STOP_LOADING, LOAD_SCREEN } from "../actions/Types";
 export type Actions =
   | {
       type: typeof START_LOADING;
     }
   | {
       type: typeof STOP_LOADING;
+    }
+    | {
+      type: typeof LOAD_SCREEN;
+      payload: string;
     };
+;
 
 //LoadingInterface to define the State type for the state of the reducer
 interface LoadingInterface {
@@ -38,6 +43,11 @@ export const Loading = (state: State = initialState, action: Actions) => {
         ...state,
         loading: false,
       };
+      case LOAD_SCREEN:
+        return {
+          ...state,
+          screenName: action.payload,
+        };
     //return state as it is if action is not of any of the aforementioned types
     default:
       return state;

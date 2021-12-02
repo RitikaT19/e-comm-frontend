@@ -1,4 +1,4 @@
-import {START_LOADING, STOP_LOADING} from "./Types"
+import {START_LOADING, STOP_LOADING, LOAD_SCREEN} from "./Types"
 import {Actions} from "../reducers/loading"
 
 export const startLoading = (dispatch: React.Dispatch<Actions>) => {
@@ -13,4 +13,20 @@ export const startLoading = (dispatch: React.Dispatch<Actions>) => {
       type: STOP_LOADING,
     });
   };
+
+  export const screenLoading =
+  (screenName: string) => async (dispatch: React.Dispatch<Actions>) => {
+    dispatch({
+      type: LOAD_SCREEN,
+      payload: screenName,
+    });
+  };
+
+export const stopScreenLoading = (dispatch: React.Dispatch<Actions>) => {
+  dispatch({
+    type: LOAD_SCREEN,
+    payload: "",
+  });
+};
+
   
