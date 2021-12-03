@@ -13,41 +13,69 @@ interface Props {
   submitProduct: any;
   showLoader: boolean;
   categoryNames: any;
-  // allCategories: Array<any>
+  isEdit: boolean;
+  productInformation: any;
+  handleEditProduct: any;
 }
 
 export const AddProduct: React.FC<Props> = ({
   CrossIconClick,
-  // allCategories,
+  handleEditProduct,
   submitProduct,
   showLoader,
   categoryNames,
+  isEdit,
+  productInformation,
 }) => {
   // stores name
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useState<string>(
+    isEdit ? productInformation.name : ""
+  );
   // stores price
-  const [price, setPrice] = useState<number>();
+  const [price, setPrice] = useState<number>(
+    isEdit ? productInformation.price : ""
+  );
   // stores quantity
-  const [quantity, setQuantity] = useState<number>();
+  const [quantity, setQuantity] = useState<number>(
+    isEdit ? productInformation.quantity : ""
+  );
   // stores description
-  const [description, setDescription] = useState<string>("");
-  // stores category
-  const [category, setCategory] = useState<string>("");
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const [selectCategoryId, setSelectCategory] = useState<string>("");
+  const [description, setDescription] = useState<string>(
+    isEdit ? productInformation.description : ""
+  );
 
-  const onClickProduct = async() =>{
-    console.log(selectedCategory, "selected cat")
-      await submitProduct({name, price, quantity, description, category:selectedCategory})
-      
-  }
-  let options: any = []
-  categoryNames.map((category: any, index: number)=>{
-      options.push({value: category._id, label: category.name})
-  })
-  
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    isEdit ? productInformation.selectedCategory : ""
+  );
 
-  console.log(options,"category names")
+  const onClickProduct = async () => {
+    console.log(selectedCategory, "selected cat");
+    await submitProduct({
+      name,
+      price,
+      quantity,
+      description,
+      category: selectedCategory,
+    });
+  };
+
+  const onEditProduct = async () => {
+    await handleEditProduct({
+      id: productInformation?._id,
+      name,
+      price,
+      quantity,
+      description,
+      category: selectedCategory,
+    });
+  };
+
+  let options: any = [];
+  categoryNames.map((category: any, index: number) => {
+    options.push({ value: category._id, label: category.name });
+  });
+
+  console.log(options, "category names");
   return (
     <div>
       {showLoader ? (
@@ -99,12 +127,12 @@ export const AddProduct: React.FC<Props> = ({
               id="description"
               onChange={(e: any) => setDescription(e.target.value)}
             />
-            
+
             {/* Submit button for adding product */}
             <Button
-              id="add-new-product-button"
-              value="Add Product"
-              handleClick={onClickProduct}
+              id={isEdit ? "edit-product-button" : "add-new-product-button"}
+              value={isEdit ? "Edit Product" : "Add Product"}
+              handleClick={isEdit ? onEditProduct : onClickProduct}
             />
           </div>
         </div>

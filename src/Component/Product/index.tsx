@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SideBar } from "../common/SideBar/Sidebar";
-import { getProductById, createProduct, removeProduct } from "../../actions/product";
+import { getProductById, createProduct, removeProduct, editProduct } from "../../actions/product";
 import {getCategory} from "../../actions/category"
 import {CategoryContext} from "../../contexts/Category"
 import { ProductContext } from "../../contexts/Product";
@@ -27,6 +27,10 @@ export const Product: React.FC = () => {
   const [showAddProductLoader, setShowAddProductLoader] = useState(false);
   // flag for display product header
   const [showDisplayProductLoader, setShowDisplayProductLoader] = useState(false);
+  // stores the flag for the edit category
+  const[editProductData, setEditProductData] = useState<boolean>(false)
+  // stores the detail of a single product
+  const [productData, setProductData] = useState<any>()
   
 
   // function for fetching products
@@ -77,7 +81,24 @@ export const Product: React.FC = () => {
     });
   };
 
-  const allCategories = () => {};
+  // function for updating product
+  const updateProduct = async(data: any) =>{
+    setShowAddProductLoader(true);
+    await editProduct(data)(productDispatch, loadingDispatch).then(()=>{
+      setShowAddProductLoader(false)
+    })
+    setShowProductPage(false)
+    fetchProducts(id)
+  }
+
+  const updateProductIconClick = (data: any)=>{
+    // sets the product detail for the card clicked
+    setProductData(data);
+    // set setShowProductPage as true
+    setShowProductPage(true)
+    // sets the edit flag as true
+    setEditProductData(true)
+  }
   return (
     <>
       <SideBar />
@@ -95,14 +116,18 @@ export const Product: React.FC = () => {
           CrossIconClick={addProductToggle}
           submitProduct={addProduct}
           showLoader = {showAddProductLoader}
+          isEdit = {editProductData}
+          productInformation = {productData}
           categoryNames = {categoryState.fetchCategorySuccess}
-          // allCategories = {allCategories}
+          handleEditProduct = {updateProduct}
         />
       ) : (
         <DisplayProduct 
         productDetails={productState.fetchProductSuccess}
         deleteProduct = {deleteProduct}
-        showLoader = {showDisplayProductLoader} />
+        showLoader = {showDisplayProductLoader}
+        updateProductIconClick = {updateProductIconClick} />
+
       )}
     </>
   );

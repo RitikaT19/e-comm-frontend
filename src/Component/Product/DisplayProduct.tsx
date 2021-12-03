@@ -9,11 +9,13 @@ interface Props {
   productDetails: any;
   deleteProduct: any;
   showLoader: boolean;
+  updateProductIconClick: any
 }
 export const DisplayProduct: React.FC<Props> = ({
   productDetails,
   deleteProduct,
   showLoader,
+  updateProductIconClick
 }) => {
   const editProduct = async(item: any) =>{
     
@@ -62,7 +64,7 @@ export const DisplayProduct: React.FC<Props> = ({
                         <Button
                           id="edit-product-button"
                           value="Edit"
-                          handleClick={()=>editProduct(item)}
+                          handleClick={()=>updateProductIconClick(item)}
                         />
                         {/* product for deleting category */}
                         <Button
