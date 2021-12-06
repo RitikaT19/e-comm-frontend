@@ -1,0 +1,155 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing SignUp Component should match snapshot 1`] = `
+<SignUp
+  errorMessage=""
+  handleSignUpButton={[MockFunction]}
+  successMessage=""
+>
+  <div
+    className="sign-up-main-div"
+  >
+    <img
+      alt="background"
+      className="background"
+      src="background.jpg"
+    />
+    <div
+      className="textfield-div"
+    >
+      <p
+        className="sign-up-heading"
+      >
+        Make a new Admin!
+      </p>
+      <Textfield
+        error=""
+        id="first_name"
+        label="First name"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Enter first name"
+        value=""
+      >
+        <div
+          className="textfield-container"
+        >
+          <label
+            htmlFor="input-field"
+          >
+            First name
+          </label>
+          <input
+            className="textfield"
+            id="first_name_element"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="Enter first name"
+            value=""
+          />
+        </div>
+      </Textfield>
+      <Textfield
+        error=""
+        id="last_name"
+        label="Last name"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Enter last name"
+        value=""
+      >
+        <div
+          className="textfield-container"
+        >
+          <label
+            htmlFor="input-field"
+          >
+            Last name
+          </label>
+          <input
+            className="textfield"
+            id="last_name_element"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="Enter last name"
+            value=""
+          />
+        </div>
+      </Textfield>
+      <Textfield
+        error=""
+        id="email"
+        label="Email"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Enter email address"
+        value=""
+      >
+        <div
+          className="textfield-container"
+        >
+          <label
+            htmlFor="input-field"
+          >
+            Email
+          </label>
+          <input
+            className="textfield"
+            id="email_element"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="Enter email address"
+            value=""
+          />
+        </div>
+      </Textfield>
+      <Textfield
+        error=""
+        id="password"
+        label="Password"
+        onBlur={[Function]}
+        onChange={[Function]}
+        placeholder="Enter password here"
+        type="password"
+        value=""
+      >
+        <div
+          className="textfield-container"
+        >
+          <label
+            htmlFor="input-field"
+          >
+            Password
+          </label>
+          <input
+            className="textfield"
+            id="password_element"
+            onBlur={[Function]}
+            onChange={[Function]}
+            placeholder="Enter password here"
+            type="password"
+            value=""
+          />
+        </div>
+      </Textfield>
+      <div
+        className="sign_up_button_div"
+      >
+        <Button
+          handleClick={[Function]}
+          id="sign_up_button"
+          value="Make Admin"
+        >
+          <button
+            className="button"
+            id="sign_up_button_element"
+            onClick={[Function]}
+          >
+            Make Admin
+          </button>
+        </Button>
+      </div>
+    </div>
+  </div>
+</SignUp>
+`;

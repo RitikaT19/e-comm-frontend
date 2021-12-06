@@ -142,7 +142,7 @@ export const SignUp: React.FC<Props> = ({
           <p className="sign-in-success">{successMessage}</p>
         ) : (
           showEmptyFieldError && (
-            <p className="sign-in-error">Please fill all the fields</p>
+            <p id= "sign-in-empty-field-error" className="sign-in-empty-field-error">Please fill all the fields</p>
           )
         )}
         <div className="sign_up_button_div">

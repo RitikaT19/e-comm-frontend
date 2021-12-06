@@ -6,12 +6,13 @@ import "../styles/add-product.css";
 import Select from "react-select";
 import Button from "../common/Button/Button";
 import { Loading } from "../common/Loading/Loading";
-import "react-dropdown/style.css";
+// import "react-dropdown/style.css";
 import {
   isQuantityValid,
   isPriceValid,
   isProductValid,
 } from "../../helpers/validate";
+import { DropDown } from "../common/DropDown/DropDown";
 
 interface Props {
   CrossIconClick: any;
@@ -64,6 +65,8 @@ export const AddProduct: React.FC<Props> = ({
 
   // stores empty field error
   const [showEmptyFieldError, setShowEmptyFieldError] = useState(false);
+
+  const[categoryValue, setCategoryValue] = useState<string>("")
 
   // function to verify product name
   const checkName = async () => {
@@ -121,6 +124,10 @@ export const AddProduct: React.FC<Props> = ({
     });
   };
 
+  const handleCategoryDropDown = (item: any) =>{
+    setSelectedCategory(item);
+    setCategoryValue(item.label)
+  }
   let options: any = [];
   categoryNames.map((category: any, index: number) => {
     options.push({ value: category._id, label: category.name });
@@ -162,10 +169,19 @@ export const AddProduct: React.FC<Props> = ({
               <Select
                 placeholder="Select category"
                 options={options}
-                value={selectedCategory}
+                 value={{ label: selectedCategory, value: selectedCategory }}
                 onChange={(e: any) => setSelectedCategory(e.value)}
               />
             </div>
+
+           {/* <DropDown
+           label = "Select cdategory"
+           options = {options}
+           id = "category-dropdown"
+           handleChange={(e: any) => handleCategoryDropDown(e.value)}
+           showLabel = {false}
+           value = {categoryValue}/>  */}
+
             {/* Textfield for quantity */}
             <Textfield
               label="Quantity"

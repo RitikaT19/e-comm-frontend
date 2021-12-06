@@ -94,7 +94,7 @@ export const Login: React.FC<Props> = ({
         ) : (
           // empty field error
           showEmptyFieldError && (
-            <p className="sign-in-error">Please fill all the fields</p>
+            <p id = "sign-in-empty-fields" className="sign-in-error">Please fill all the fields</p>
           )
         )}
         <div className="login_button_div">

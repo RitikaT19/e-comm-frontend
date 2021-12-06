@@ -24,7 +24,6 @@ export const Textfield: React.FC<Props> = ({
   onBlur,
 }) => {
   const [focus, setFocus] = useState<boolean>(false);
-  console.log(error)
   return (
     <div className="textfield-container">
       {label && <label htmlFor="input-field">{label}</label>

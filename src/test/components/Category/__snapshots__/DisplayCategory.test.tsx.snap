@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Display Category should match snapshot 1`] = `
+<DisplayCategory
+  categoryInfo={
+    Object {
+      "name": "test",
+    }
+  }
+  deleteCategory={[MockFunction]}
+  showLoader={false}
+  updateCategoryIconClick={[MockFunction]}
+>
+  <div>
+    <div
+      className="display-category-container"
+    >
+      <div
+        className="display-category"
+      />
+    </div>
+  </div>
+</DisplayCategory>
+`;

@@ -62,7 +62,7 @@ export const DisplayCategory: React.FC<Props> = ({
                     />
                     {/* Button for deleting category */}
                     <Button
-                      id="delete-product-button"
+                      id="delete-category-button"
                       value="Delete"
                       handleClick={() => onDelete(index)}
                     />

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing Display Products should match snapshot 1`] = `
+<DisplayProduct
+  deleteProduct={[MockFunction]}
+  productDetails={
+    Object {
+      "category": "test",
+      "description": "test",
+      "name": "Test",
+      "price": "10",
+      "quantity": "10",
+    }
+  }
+  showLoader={false}
+  updateProductIconClick={[MockFunction]}
+>
+  <div>
+    <div
+      className="display-product-main-container"
+    >
+      <div />
+    </div>
+  </div>
+</DisplayProduct>
+`;
