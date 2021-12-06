@@ -3,6 +3,7 @@ import Button from "../common/Button/Button";
 import { Textfield } from "../common/Textfield/Textfield";
 import "../styles/sign-up.css";
 import background from "../../assets/Icons/background.jpg";
+import {isNameValid, isEmailValid, isPasswordValid} from "../../helpers/validate"
 
 // define interface for the required props by the component
 interface Props {
@@ -17,15 +18,66 @@ export const SignUp: React.FC<Props> = ({
 }) => {
   // stores email
   const [email, setEmail] = useState<string>("");
+  // stores email error
+  const[emailError, setEmailError] = useState<string>("")
   // stores password
   const [password, setPassword] = useState<string>("");
+  // stores password error
+  const [passwordError, setPasswordError] = useState<string>("")
   // stores first name
   const [firstName, setFirstName] = useState<string>("");
+  // stores firstName error
+  const [firstNameError, setFirstNameError] = useState<string>("");
   // stores last name
   const [lastName, setLastName] = useState<string>("");
+  // stores lastName error
+  const [lastNameError, setLastNameError] = useState<string>("");
   // stores empty field error
   const [showEmptyFieldError, setShowEmptyFieldError] = useState(false);
 
+  // function for verifying firstName
+  const checkFirstName = async() =>{
+    const verifyFirstNameResult = isNameValid(firstName)
+    if(!verifyFirstNameResult){
+      setFirstNameError("Enter a valid name")
+    }
+    else{
+      setFirstNameError("")
+    }
+  }
+
+  // function for verifying lastName
+  const checkLastName = async() =>{
+    const verifyLastNameResult = isNameValid(lastName)
+    if(!verifyLastNameResult){
+      setLastNameError("Enter a valid name")
+    }
+    else{
+      setLastNameError("")
+    }
+  }
+
+   // verifies email id
+   const checkEmail = async() =>{
+    const isEmailValidResult = isEmailValid(email)
+    // give error message if email id not valid
+    if(!isEmailValidResult){
+      setEmailError("Please enter a valid email id")
+    }else{
+      // give error message if email is not provided
+      setEmailError("")
+    }
+  }
+
+  // verify password
+  const checkPassword = async() =>{
+    const isPasswordValidResult = isPasswordValid(password)
+    if(!isPasswordValidResult){
+      setPasswordError("Please enter valid password")
+    }else{
+      setPasswordError("")
+    }
+  }
   // function for when clickSignUpButton is called
   const clickSignUpButton = async () => {
     // if any of the parameter is missing, throw error
@@ -49,6 +101,8 @@ export const SignUp: React.FC<Props> = ({
           id="first_name"
           onChange={(e: any) => setFirstName(e.target.value)}
           value={firstName}
+          error = {firstNameError}
+          onBlur = {checkFirstName}
         />
         {/* input for last name */}
         <Textfield
@@ -57,6 +111,8 @@ export const SignUp: React.FC<Props> = ({
           id="last_name"
           onChange={(e: any) => setLastName(e.target.value)}
           value={lastName}
+          error = {lastNameError}
+          onBlur = {checkLastName}
         />
         {/* input for email */}
         <Textfield
@@ -65,6 +121,8 @@ export const SignUp: React.FC<Props> = ({
           id="email"
           onChange={(e: any) => setEmail(e.target.value)}
           value={email}
+          error = {emailError}
+          onBlur = {checkEmail}
         />
         {/* input for password */}
         <Textfield
@@ -74,6 +132,8 @@ export const SignUp: React.FC<Props> = ({
           id="password"
           onChange={(e: any) => setPassword(e.target.value)}
           value={password}
+          error = {passwordError}
+          onBlur = {checkPassword}
         />
         {/* if there is error, print the error message  */}
         {errorMessage ? (

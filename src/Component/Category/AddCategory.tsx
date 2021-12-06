@@ -4,6 +4,7 @@ import { Textfield } from "../common/Textfield/Textfield";
 import "../styles/add-category.css";
 import cross from "../../assets/Icons/cross.png";
 import { Loading } from "../common/Loading/Loading";
+import { isCategoryValid } from "../../helpers/validate";
 
 // Define all the props required by the component
 interface Props {
@@ -13,6 +14,8 @@ interface Props {
   showLoader: boolean;
   categoryDetail: any;
   handleEditCategory: any;
+  errorMessage: any;
+  successMessage: any;
 }
 
 export const AddCategory: React.FC<Props> = ({
@@ -22,15 +25,36 @@ export const AddCategory: React.FC<Props> = ({
   showLoader,
   categoryDetail,
   handleEditCategory,
+  errorMessage,
+  successMessage,
 }) => {
   // stores name
   const [name, setName] = useState<string>(isEdit ? categoryDetail.name : "");
+  // stores name error
+  const [nameError, setNameError] = useState<string>("");
+  // stores empty field error
+  const [showEmptyFieldError, setShowEmptyFieldError] = useState(false);
+
+  const checkCategory = async () => {
+    const validateCategoryResult = isCategoryValid(name);
+    if (!validateCategoryResult) {
+      setNameError("Please enter valid category");
+    } else {
+      setNameError("");
+    }
+  };
+  console.log(errorMessage, "erreee")
 
   // function for when submitCategory button is clicked
   const submitCategory = async () => {
-    // call handle add category with name
+    if (!name) {
+      setShowEmptyFieldError(true);
+    }
+    else{
+      // call handle add category with name
     await handleAddCategory({ name });
     console.log(name, "name from add category");
+    }
   };
   const editCategoryButtonClick = async () => {
     const data = { id: categoryDetail?._id, name };
@@ -56,8 +80,20 @@ export const AddCategory: React.FC<Props> = ({
               placeholder="Enter category name here"
               value={name}
               onChange={(e: any) => setName(e.target.value)}
+              error={nameError}
+              onBlur={checkCategory}
             />
           </div>
+          {/* {errorMessage ? (
+            <p className="add-user-error"> {errorMessage}</p>
+           
+          ) : successMessage ? (
+            <p className="add-user-success">{successMessage}</p>
+          ) : (
+            showEmptyFieldError && (
+              <p className="add-user-error">Please fill all the fields</p>
+            )
+          )} */}
           {/* button for submitting category */}
           <Button
             id={isEdit ? "edit-category-button" : "add-category-button"}

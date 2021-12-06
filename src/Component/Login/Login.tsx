@@ -3,6 +3,7 @@ import Button from "../common/Button/Button";
 import { Textfield } from "../common/Textfield/Textfield";
 import "../styles/login.css";
 import background from "../../assets/Icons/background.jpg";
+import {isEmailValid, isPasswordValid} from "../../helpers/validate"
 
 // Define all the required props by the component
 interface Props {
@@ -18,11 +19,35 @@ export const Login: React.FC<Props> = ({
 }) => {
   // stores email
   const [email, setEmail] = useState<string>("");
+  // stores email error
+  const [emailError, setEmailError] = useState<string>("");
   // stored password
   const [password, setPassword] = useState<string>("");
+  // stored password error
+  const [passwordError, setPasswordError] = useState<string>("");
   // stores empty field error
   const [showEmptyFieldError, setShowEmptyFieldError] = useState(false);
 
+  // verifies email id
+  const checkEmail = async() =>{
+    const isEmailValidResult = isEmailValid(email)
+    // give error message if email id not valid
+    if(!isEmailValidResult){
+      setEmailError("Please enter a valid email id")
+    }else{
+      // give error message if email is not provided
+      setEmailError("")
+    }
+  }
+
+  const checkPassword = async() =>{
+    const isPasswordValidResult = isPasswordValid(password)
+    if(!isPasswordValidResult){
+      setPasswordError("Please enter valid password")
+    }else{
+      setPasswordError("")
+    }
+  }
   // function for when clickLoginButton is called
   const clickLoginButton = async () => {
     // if either of the parameter is not provided, throw error
@@ -47,6 +72,8 @@ export const Login: React.FC<Props> = ({
           id="email"
           onChange={(e: any) => setEmail(e.target.value)}
           value={email}
+          error = {emailError}
+          onBlur = {checkEmail}
         />
         {/* input for the password */}
         <Textfield
@@ -56,6 +83,8 @@ export const Login: React.FC<Props> = ({
           id="password"
           onChange={(e: any) => setPassword(e.target.value)}
           value={password}
+          error = {passwordError}
+          onBlur = {checkPassword}
         />
         {/* error and success message */}
         {errorMessage ? (

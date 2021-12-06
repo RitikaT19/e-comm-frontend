@@ -7,10 +7,10 @@ import { LoginContextProvider } from "./contexts/Login";
 import { SignUpAdmin } from "./component/Sign-up";
 import { LoginAdmin } from "./component/Login";
 import { CategoryProvider } from "./contexts/Category";
-import {Category} from "./component/Category"
+import { Category } from "./component/Category";
 import axios from "axios";
 import { Product } from "./component/Product";
-import {ProductContextProvider} from "./contexts/Product"
+import { ProductContextProvider } from "./contexts/Product";
 
 function App() {
   const token: string | null = localStorage.getItem("E_COMM:AUTH_TOKEN");
@@ -24,14 +24,14 @@ function App() {
           <LoginContextProvider>
             <CategoryProvider>
               <ProductContextProvider>
-              <Router>
-                <Switch>
-                <Route exact path="/" component={LoginAdmin} />
-                  <Route exact path="/sign-up" component={SignUpAdmin} />
-                  <Route exact path="/category" component={Category} />
-                  <Route exact path = "/product/:id" component={Product}/>
-                </Switch>
-              </Router>
+                <Router>
+                  <Switch>
+                    <Route exact path="/" component={LoginAdmin} />
+                    <Route exact path="/sign-up" component={SignUpAdmin} />
+                    <Route exact path="/category" component={Category} />
+                    <Route exact path="/product/:id" component={Product} />
+                  </Switch>
+                </Router>
               </ProductContextProvider>
             </CategoryProvider>
           </LoginContextProvider>

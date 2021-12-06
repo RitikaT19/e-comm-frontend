@@ -16,7 +16,7 @@ export const MenuHeaderCategory: React.FC<Props> = ({ categoryInfo }) => {
         categoryInfo?.map((item: any, index: number) => (
           <div key={index}>
             {/* render categories accordingg to the category id */}
-              <p onClick={()=>history.push(`/product/${item._id}`)} 
+              <p className = "selected-product" onClick={()=>history.push(`/product/${item._id}`)} 
               // display name
               id={"display-category-name"}>{item.name}</p>
           </div>

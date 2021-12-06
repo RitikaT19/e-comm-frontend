@@ -7,6 +7,11 @@ import Select from "react-select";
 import Button from "../common/Button/Button";
 import { Loading } from "../common/Loading/Loading";
 import "react-dropdown/style.css";
+import {
+  isQuantityValid,
+  isPriceValid,
+  isProductValid,
+} from "../../helpers/validate";
 
 interface Props {
   CrossIconClick: any;
@@ -16,6 +21,8 @@ interface Props {
   isEdit: boolean;
   productInformation: any;
   handleEditProduct: any;
+  errorMessage: any;
+  successMessage: any;
 }
 
 export const AddProduct: React.FC<Props> = ({
@@ -26,19 +33,26 @@ export const AddProduct: React.FC<Props> = ({
   categoryNames,
   isEdit,
   productInformation,
+  errorMessage,
+  successMessage,
 }) => {
   // stores name
   const [name, setName] = useState<string>(
     isEdit ? productInformation.name : ""
   );
+  // stores name error
+  const [nameError, setNameError] = useState<string>("");
   // stores price
-  const [price, setPrice] = useState<number>(
+  const [price, setPrice] = useState<string>(
     isEdit ? productInformation.price : ""
   );
+  // stores price error
+  const [priceError, setPriceError] = useState<string>("");
   // stores quantity
-  const [quantity, setQuantity] = useState<number>(
+  const [quantity, setQuantity] = useState<string>(
     isEdit ? productInformation.quantity : ""
   );
+  const [quantityError, setQuantityError] = useState<string>("");
   // stores description
   const [description, setDescription] = useState<string>(
     isEdit ? productInformation.description : ""
@@ -48,15 +62,52 @@ export const AddProduct: React.FC<Props> = ({
     isEdit ? productInformation.selectedCategory : ""
   );
 
+  // stores empty field error
+  const [showEmptyFieldError, setShowEmptyFieldError] = useState(false);
+
+  // function to verify product name
+  const checkName = async () => {
+    const verifyNameResult = isProductValid(name);
+    if (!verifyNameResult) {
+      setNameError("Enter a valid product");
+    } else {
+      setNameError("");
+    }
+  };
+
+  // verify quantity
+  const checkQuantity = async () => {
+    const verifyQuantityResult = isQuantityValid(quantity);
+    if (!verifyQuantityResult) {
+      setQuantityError("Enter valid quantity");
+    } else {
+      setQuantityError("");
+    }
+  };
+
+  // verify price
+  const checkPrice = async () => {
+    const verifyPriceResult = isPriceValid(price);
+    if (!verifyPriceResult) {
+      setPriceError("Enter valid Price");
+    } else {
+      setPriceError("");
+    }
+  };
+
+  // function for when onClickProduct is clicked
   const onClickProduct = async () => {
-    console.log(selectedCategory, "selected cat");
-    await submitProduct({
-      name,
-      price,
-      quantity,
-      description,
-      category: selectedCategory,
-    });
+    if (!(name || quantity || selectedCategory || price || description)) {
+      setShowEmptyFieldError(true);
+    } else {
+      await submitProduct({
+        name,
+        price,
+        quantity,
+        description,
+        category: selectedCategory,
+      });
+    }
   };
 
   const onEditProduct = async () => {
@@ -93,6 +144,8 @@ export const AddProduct: React.FC<Props> = ({
               value={name}
               id="name"
               onChange={(e: any) => setName(e.target.value)}
+              error = {nameError}
+              onBlur = {checkName}
             />
             {/*textfield for price  */}
             <Textfield
@@ -101,13 +154,15 @@ export const AddProduct: React.FC<Props> = ({
               value={price}
               id="price"
               onChange={(e: any) => setPrice(e.target.value)}
+              error = {priceError}
+              onBlur = {checkPrice}
             />
             {/* Dropdown list for category options */}
             <div className="dropdown">
               <Select
                 placeholder="Select category"
                 options={options}
-                value={{ label: selectedCategory, value: selectedCategory }}
+                value={selectedCategory}
                 onChange={(e: any) => setSelectedCategory(e.value)}
               />
             </div>
@@ -118,6 +173,8 @@ export const AddProduct: React.FC<Props> = ({
               value={quantity}
               id="quantity"
               onChange={(e: any) => setQuantity(e.target.value)}
+              error = {quantityError}
+              onBlur = {checkQuantity}
             />
             {/* textarea for description */}
             <TextArea
@@ -127,6 +184,15 @@ export const AddProduct: React.FC<Props> = ({
               id="description"
               onChange={(e: any) => setDescription(e.target.value)}
             />
+            {errorMessage ? (
+              <p className="sign-in-error">{errorMessage}</p>
+            ) : successMessage ? (
+              <p className="sign-in-success">{successMessage}</p>
+            ) : (
+              showEmptyFieldError && (
+                <p className="sign-in-error">Please fill all the fields</p>
+              )
+            )}
 
             {/* Submit button for adding product */}
             <Button

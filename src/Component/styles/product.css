@@ -1,5 +1,6 @@
 .actionButton{
     display: flex;
+    margin-top: 30px;
 }
 .add-product-heading{
     font-size: 20px;

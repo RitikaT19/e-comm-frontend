@@ -49,6 +49,8 @@ export const Product: React.FC = () => {
 
   // function for toggling add product page
   const addProductToggle = () => {
+    setEditProductData(false)
+    setProductData("")
     setShowProductPage(!showProductPage);
   };
 
@@ -120,6 +122,8 @@ export const Product: React.FC = () => {
           productInformation = {productData}
           categoryNames = {categoryState.fetchCategorySuccess}
           handleEditProduct = {updateProduct}
+          errorMessage = {editProductData ? productState.updateProductError : productState.error}
+          successMessage = {editProductData ? productState.updateProductSuccess: productState.updateProductError}
         />
       ) : (
         <DisplayProduct 

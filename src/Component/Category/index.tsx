@@ -108,6 +108,8 @@ export const Category: React.FC = () => {
         />
       </div>
 
+      {console.log(categoryState.error, "...")}
+
       <div className="category-container-div">
         {/* if showAddCategoryPage is true then render AddCategory page else render display category page */}
         {showAddCategoryPage ? (
@@ -118,6 +120,8 @@ export const Category: React.FC = () => {
             showLoader = {showAddCategoryLoader}
             categoryDetail = {categoryData}
             handleEditCategory = {updateCategory}
+            errorMessage = {editCategoryData ? categoryState.updateCategoryError : categoryState.error}
+            successMessage = {editCategoryData ? categoryState.updateCategorySuccess : categoryState.createCategorySuccess}
           />
         ) : (
           <DisplayCategory

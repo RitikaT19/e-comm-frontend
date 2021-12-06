@@ -1,10 +1,16 @@
 .display-category-container {
   display: flex;
   text-decoration: none;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   margin-top: -10px;
+  overflow-x:auto;
 }
 #display-category-name{
     text-decoration: none;
     cursor: pointer;
+    margin-right: 10px;
+    margin-left: 20px;
+}
+#display-category-name:hover{
+  color:red;
 }
