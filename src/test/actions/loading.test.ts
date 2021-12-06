@@ -1,5 +1,5 @@
-import { startLoading, stopLoading } from "./../../actions/loading";
-import { START_LOADING, STOP_LOADING } from "./../../actions/Types";
+import { startLoading, stopLoading } from "../../actions/loading";
+import { START_LOADING, STOP_LOADING } from "../../actions/Types";
 describe("Testing Loading Actions", () => {
   const dispatch = jest.fn();
   afterAll(() => {

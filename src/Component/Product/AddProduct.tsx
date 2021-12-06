@@ -60,13 +60,11 @@ export const AddProduct: React.FC<Props> = ({
   );
 
   const [selectedCategory, setSelectedCategory] = useState<string>(
-    isEdit ? productInformation.selectedCategory : ""
+    isEdit ? productInformation.category : ""
   );
 
   // stores empty field error
   const [showEmptyFieldError, setShowEmptyFieldError] = useState(false);
-
-  const [categoryValue, setCategoryValue] = useState<string>("");
 
   // function to verify product name
   const checkName = async () => {
@@ -124,10 +122,6 @@ export const AddProduct: React.FC<Props> = ({
     });
   };
 
-  // const handleCategoryDropDown = (item: any) =>{
-  //   setSelectedCategory(item);
-  //   setCategoryValue(item.label)
-  // }
   let options: any = [];
   categoryNames.map((category: any, index: number) => {
     options.push({ value: category._id, label: category.name });
