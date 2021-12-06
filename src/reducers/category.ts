@@ -7,6 +7,7 @@ import {
   DELETE_CATEGORY_ERROR,
   UPDATE_CATEGORY,
   UPDATE_CATEGORY_ERROR,
+  CLEAR_ERRORS,
 } from "../actions/Types";
 
 export type Actions =
@@ -41,6 +42,9 @@ export type Actions =
   | {
       type: typeof UPDATE_CATEGORY_ERROR;
       payload: string;
+    }
+  | {
+      type: typeof CLEAR_ERRORS;
     };
 
 interface CategoryInterface {
@@ -111,6 +115,18 @@ export const Category = (state: State = initialState, action: Actions) => {
       return {
         ...state,
         updateCategoryError: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+        createCategoryError: null,
+        createCategorySuccess: null,
+        fetchCategoryError: null,
+        deleteCategorySuccess: null,
+        deleteCategoryError: null,
+        updateCategorySuccess: null,
+        updateCategoryError: null,
       };
     default:
       return state;

@@ -39,7 +39,7 @@ export const signIn =
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       // redirect to /category after sign in
       history?.push("/category");
-    } catch (error: any) {
+    } catch (error) {
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       dispatch({

@@ -43,7 +43,7 @@ export const AddCategory: React.FC<Props> = ({
       setNameError("");
     }
   };
-  console.log(errorMessage, "erreee")
+  console.log(successMessage, "error from category")
 
   // function for when submitCategory button is clicked
   const submitCategory = async () => {
@@ -84,7 +84,7 @@ export const AddCategory: React.FC<Props> = ({
               onBlur={checkCategory}
             />
           </div>
-          {/* {errorMessage ? (
+          {errorMessage ? (
             <p className="add-user-error"> {errorMessage}</p>
            
           ) : successMessage ? (
@@ -93,7 +93,7 @@ export const AddCategory: React.FC<Props> = ({
             showEmptyFieldError && (
               <p className="add-user-error">Please fill all the fields</p>
             )
-          )} */}
+          )}
           {/* button for submitting category */}
           <Button
             id={isEdit ? "edit-category-button" : "add-category-button"}

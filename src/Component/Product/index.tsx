@@ -60,12 +60,12 @@ export const Product: React.FC = () => {
     // call createProduct action
     await createProduct(data)(productDispatch, loadingDispatch).then(()=>{
       setShowAddProductLoader(false)
-      
     });
-    
+    setTimeout(()=>{
+      setShowProductPage(false)
+    },2000)
     // call fetchProducts after adding a new product
     fetchProducts(id);
-    setShowProductPage(false)
   };
 
   // function for deleting product

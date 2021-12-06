@@ -115,9 +115,5 @@ describe("testing category actions", () => {
         done();
       });
   });
-
-  // it("should call the dispatch function with the type UPDATE_CATEGORY and payload", () =>{
-
-  // })
   
 });

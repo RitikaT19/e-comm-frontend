@@ -2,7 +2,9 @@ import {
     FETCH_PRODUCT,
     FETCH_PRODUCT_ERROR,
     START_LOADING,
-    STOP_LOADING
+    STOP_LOADING,
+    DELETE_PRODUCT,
+    DELETE_CATEGORY_ERROR
   } from "../../actions/Types";
   import { API_URL } from "../../actions/serverConnection";
   import * as actions from "../../actions/product";
@@ -55,4 +57,24 @@ import {
             done();
           });
       });
+
+      it("should call the dispatch function with the type DELETE_CATEGORY and payload", (done) => {
+        const id = "abcd";
+        const responseAPI = { message: "Category deleted successfully!" };
+        mock.onDelete(`${API_URL}/product/` + id).replyOnce(200, responseAPI);
+        actions
+          .removeProduct(id)(productDispatch, loadingDispatch)
+          .then(() => {
+            expect(loadingDispatch).toHaveBeenCalledWith({ type: START_LOADING });
+            expect(productDispatch).toHaveBeenCalledWith({
+              type: FETCH_PRODUCT_ERROR,
+              payload: undefined,
+            });
+            expect(loadingDispatch).toHaveBeenCalledWith({
+              type: STOP_LOADING,
+            });
+            done();
+          });
+      });
+      
   })

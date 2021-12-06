@@ -10,6 +10,7 @@ import {
   DELETE_CATEGORY_ERROR,
   UPDATE_CATEGORY,
   UPDATE_CATEGORY_ERROR,
+  CLEAR_ERRORS
 } from "./Types";
 import { API_URL } from "./serverConnection";
 import { Actions } from "../reducers/category";
@@ -35,14 +36,14 @@ export const getCategory =
         type: FETCH_CATEGORY,
         payload: result.data.data,
       });
-    } catch (error: any) {
+    } catch (error) {
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       // dispatch error data
       dispatch({
         type: FETCH_CATEGORY_ERROR,
         payload: error.response
-          ? error.response.data
+          ? error.response.data.message
           : "Failed to connect with the server",
       });
     }
@@ -68,13 +69,14 @@ export const createNewCategory =
         type: CREATE_CATEGORY,
         payload: result.data.result,
       });
-    } catch (error: any) {
+    } catch (error) {
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
+      console.log(error, "error fro, axiossssss")
       dispatch({
         type: CREATE_CATEGORY_ERROR,
         payload: error.response
-          ? error.response.data
+          ? error.response.data.message
           : "Failed to connect with the server",
       });
     }
@@ -100,7 +102,7 @@ export const deleteCategory =
         type: DELETE_CATEGORY,
         payload: result.data,
       });
-    } catch (error: any) {
+    } catch (error) {
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       dispatch({
@@ -130,7 +132,7 @@ export const editCategory =
         type: UPDATE_CATEGORY,
         payload: result.data.message,
       });
-    } catch (error: any) {
+    } catch (error) {
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       dispatch({
@@ -141,3 +143,11 @@ export const editCategory =
       });
     }
   };
+
+  export const clearErrors = (dispatch: React.Dispatch<Actions>) => {
+    //Dispatch CLEAR_ERRORS type
+    dispatch({
+      type: CLEAR_ERRORS,
+    });
+  };
+  

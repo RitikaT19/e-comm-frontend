@@ -3,7 +3,7 @@ import cross from "../../assets/Icons/cross.png";
 import { TextArea } from "../common/TextArea/TextArea";
 import { Textfield } from "../common/Textfield/Textfield";
 import "../styles/add-product.css";
-import Select from "react-select";
+// import Select from "react-select";
 import Button from "../common/Button/Button";
 import { Loading } from "../common/Loading/Loading";
 // import "react-dropdown/style.css";
@@ -66,7 +66,7 @@ export const AddProduct: React.FC<Props> = ({
   // stores empty field error
   const [showEmptyFieldError, setShowEmptyFieldError] = useState(false);
 
-  const[categoryValue, setCategoryValue] = useState<string>("")
+  const [categoryValue, setCategoryValue] = useState<string>("");
 
   // function to verify product name
   const checkName = async () => {
@@ -124,10 +124,10 @@ export const AddProduct: React.FC<Props> = ({
     });
   };
 
-  const handleCategoryDropDown = (item: any) =>{
-    setSelectedCategory(item);
-    setCategoryValue(item.label)
-  }
+  // const handleCategoryDropDown = (item: any) =>{
+  //   setSelectedCategory(item);
+  //   setCategoryValue(item.label)
+  // }
   let options: any = [];
   categoryNames.map((category: any, index: number) => {
     options.push({ value: category._id, label: category.name });
@@ -144,6 +144,17 @@ export const AddProduct: React.FC<Props> = ({
             <div className="close-button">
               <img src={cross} alt="cross" onClick={CrossIconClick} />
             </div>
+            <label htmlFor="text">Category</label>
+            <div className="dropdown-category">
+              <DropDown
+                label="Select category"
+                options={options}
+                id="category-dropdown"
+                handleChange={(e: any) => setSelectedCategory(e.value)}
+                showLabel={false}
+                value={selectedCategory}
+              />
+            </div>
             {/* textfield for name */}
             <Textfield
               label="Name"
@@ -151,8 +162,8 @@ export const AddProduct: React.FC<Props> = ({
               value={name}
               id="name"
               onChange={(e: any) => setName(e.target.value)}
-              error = {nameError}
-              onBlur = {checkName}
+              error={nameError}
+              onBlur={checkName}
             />
             {/*textfield for price  */}
             <Textfield
@@ -161,26 +172,9 @@ export const AddProduct: React.FC<Props> = ({
               value={price}
               id="price"
               onChange={(e: any) => setPrice(e.target.value)}
-              error = {priceError}
-              onBlur = {checkPrice}
+              error={priceError}
+              onBlur={checkPrice}
             />
-            {/* Dropdown list for category options */}
-            <div className="dropdown">
-              <Select
-                placeholder="Select category"
-                options={options}
-                 value={{ label: selectedCategory, value: selectedCategory }}
-                onChange={(e: any) => setSelectedCategory(e.value)}
-              />
-            </div>
-
-           {/* <DropDown
-           label = "Select cdategory"
-           options = {options}
-           id = "category-dropdown"
-           handleChange={(e: any) => handleCategoryDropDown(e.value)}
-           showLabel = {false}
-           value = {categoryValue}/>  */}
 
             {/* Textfield for quantity */}
             <Textfield
@@ -189,8 +183,8 @@ export const AddProduct: React.FC<Props> = ({
               value={quantity}
               id="quantity"
               onChange={(e: any) => setQuantity(e.target.value)}
-              error = {quantityError}
-              onBlur = {checkQuantity}
+              error={quantityError}
+              onBlur={checkQuantity}
             />
             {/* textarea for description */}
             <TextArea

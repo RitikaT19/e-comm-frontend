@@ -5,6 +5,7 @@ import {
   getCategory,
   deleteCategory,
   editCategory,
+  clearErrors,
 } from "../../actions/category";
 import { CategoryContext } from "../../contexts/Category";
 import { LoadingContext } from "../../contexts/Loading";
@@ -21,31 +22,31 @@ export const Category: React.FC = () => {
   // stores flag for showing add category page
   const [showAddCategoryPage, setShowAddCategoryPage] = useState(false);
   // flag for display category loader
-  const [showDisplayCategoryLoader, setDisplayCategoryShowLoader] = useState(false)
+  const [showDisplayCategoryLoader, setDisplayCategoryShowLoader] =
+    useState(false);
   // flag for display category loader
-  const [showAddCategoryLoader, setAddCategoryShowLoader] = useState(false)
+  const [showAddCategoryLoader, setAddCategoryShowLoader] = useState(false);
   // stores the state for edit category flag
-  const [editCategoryData, setEditCategoryData] = useState<boolean>(false)
+  const [editCategoryData, setEditCategoryData] = useState<boolean>(false);
   // stored the detail of a single category
-  const [categoryData, setCategoryData] = useState<any>()
-  
-  
+  const [categoryData, setCategoryData] = useState<any>();
+
   // toggle function for showing add category page
   const addCategoryToggle = () => {
     // toggles add category page
     setShowAddCategoryPage(!showAddCategoryPage);
     // sets edit flag as false
-    setEditCategoryData(false)
+    setEditCategoryData(false);
     // sets category data as empty
     setCategoryData({});
   };
 
   // function for fetching category
   const fetchCategory = async () => {
-    setDisplayCategoryShowLoader(true)
+    setDisplayCategoryShowLoader(true);
     // call getCategory action
-    await getCategory()(categoryDispatch, loadingDispatch).then(()=>{
-      setDisplayCategoryShowLoader(false)
+    await getCategory()(categoryDispatch, loadingDispatch).then(() => {
+      setDisplayCategoryShowLoader(false);
     });
   };
 
@@ -56,14 +57,21 @@ export const Category: React.FC = () => {
 
   // function for adding category
   const addCategory = async (data: string) => {
-    setAddCategoryShowLoader(true)
+    setAddCategoryShowLoader(true);
     // call createNewCategory action
-    await createNewCategory(data)(categoryDispatch, loadingDispatch).then(()=>{
-      setAddCategoryShowLoader(false)
-    });
-    // call fetchCategory everytime after a new category is added
+    await createNewCategory(data)(categoryDispatch, loadingDispatch).then(
+      () => {
+        setAddCategoryShowLoader(false);
+      }
+    );
+    setTimeout(() => {
+      setShowAddCategoryPage(false);
+      clearErrors(categoryDispatch)
+    }, 2000);
+    
+
+    // call fetchCategory every time after a new category is added
     fetchCategory();
-    setShowAddCategoryPage(false)
   };
 
   // function for deleting a category
@@ -75,25 +83,24 @@ export const Category: React.FC = () => {
   };
 
   // function for updating category
-  const updateCategory = async(data: any) =>{
-    setAddCategoryShowLoader(true)
+  const updateCategory = async (data: any) => {
+    setAddCategoryShowLoader(true);
     // call action editCategory
-    await editCategory(data)(categoryDispatch, loadingDispatch).then(()=>(
-    setAddCategoryShowLoader(false)
-    ))
-    fetchCategory()
-    setShowAddCategoryPage(false)
+    await editCategory(data)(categoryDispatch, loadingDispatch).then(() =>
+      setAddCategoryShowLoader(false)
+    );
+    fetchCategory();
+    setShowAddCategoryPage(false);
   };
 
-  const updateCategoryIconClick = (data: any) =>{
+  const updateCategoryIconClick = (data: any) => {
     // sets the category detail for the card clicked
     setCategoryData(data);
-    // sets the setShowAddCategoryPage true 
-    setShowAddCategoryPage(true)
+    // sets the setShowAddCategoryPage true
+    setShowAddCategoryPage(true);
     // sets the edit flag true
-    setEditCategoryData(true)
-    
-  }
+    setEditCategoryData(true);
+  };
   return (
     <div className="category-main-div">
       <SideBar />
@@ -116,19 +123,27 @@ export const Category: React.FC = () => {
           <AddCategory
             CrossIconClick={addCategoryToggle}
             handleAddCategory={addCategory}
-            isEdit = {editCategoryData}
-            showLoader = {showAddCategoryLoader}
-            categoryDetail = {categoryData}
-            handleEditCategory = {updateCategory}
-            errorMessage = {editCategoryData ? categoryState.updateCategoryError : categoryState.error}
-            successMessage = {editCategoryData ? categoryState.updateCategorySuccess : categoryState.createCategorySuccess}
+            isEdit={editCategoryData}
+            showLoader={showAddCategoryLoader}
+            categoryDetail={categoryData}
+            handleEditCategory={updateCategory}
+            errorMessage={
+              editCategoryData
+                ? categoryState.updateCategoryError
+                : categoryState.error
+            }
+            successMessage={
+              editCategoryData
+                ? categoryState.updateCategorySuccess
+                : categoryState.createCategorySuccess
+            }
           />
         ) : (
           <DisplayCategory
             categoryInfo={categoryState.fetchCategorySuccess}
             deleteCategory={removeCategory}
             updateCategoryIconClick={updateCategoryIconClick}
-            showLoader = {showDisplayCategoryLoader}
+            showLoader={showDisplayCategoryLoader}
           />
         )}
       </div>

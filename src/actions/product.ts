@@ -35,9 +35,10 @@ export const createProduct =
         type: CREATE_PRODUCT,
         payload: result.data,
       });
-    } catch (error: any) {
+    } catch (error) {
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
+      console.log(error,"asasaa")
       dispatch({
         type: CREATE_PRODUCT_ERROR,
         payload: error.response
@@ -68,14 +69,14 @@ export const getProductById =
         type: FETCH_PRODUCT,
         payload: result.data.data,
       });
-    } catch (error: any) {
+    } catch (error) {
       // dispatch stop loading in case of error
       stopLoading(loadingDispatch);
       // dispatch error data
       dispatch({
         type: FETCH_PRODUCT_ERROR,
         payload: error.response
-          ? error.response.data
+          ? error.response.data.message
           : "Failed to connect with the server",
       });
     }
@@ -100,14 +101,14 @@ export const removeProduct =
         type: DELETE_PRODUCT,
         payload: result.data,
       });
-    } catch (error: any) {
+    } catch (error) {
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       // dispatch the error data
       dispatch({
         type: DELETE_PRODUCT_ERROR,
         payload: error.response
-          ? error.response.data
+          ? error.response.data.message
           : "Failed to connect with the server",
       });
     }
@@ -133,12 +134,12 @@ export const editProduct =
         type: UPDATE_PRODUCT,
         payload: result.data,
       });
-    } catch (error: any) {
+    } catch (error) {
       // dispatch error data
       dispatch({
         type: UPDATE_PRODUCT_ERROR,
         payload: error.response
-          ? error.response.data
+          ? error.response.data.message
           : "Failed to connect with the server",
       });
     }

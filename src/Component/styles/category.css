@@ -1,20 +1,21 @@
-.display-category-action{
-    display: flex;
-    margin-left: 10px;
+.display-category-action {
+  display: flex;
+  margin-left: 10px;
+  
 }
 
-#display-category-button_element{
-    margin-left: 1000px;
-    margin-top:10px;
+#display-category-button_element {
+  margin-left: 1000px;
+  margin-top: 10px;
 }
 img.category-card {
-    width: 60%;
-    margin-left: 40px;
+  width: 60%;
+  margin-left: 40px;
 }
-.category-card-div{
-    width: 200px;
+.category-card-div {
+  width: 200px;
   margin-left: 60px;
-  display:inline-table;
+  display: inline-table;
   margin-top: 20px;
   box-shadow: 0 2px 20px rgb(0 0 0 / 10%);
   background-color: rgb(209, 204, 240);
@@ -24,6 +25,9 @@ img.category-card {
   font-size: 20px;
   overflow: hidden;
 }
-#display-category-name{
-    text-align: center;
+#display-category-name {
+  text-align: center;
+}
+#delete-category-button_element{
+    margin-left: 10px;
 }
