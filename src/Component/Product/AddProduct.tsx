@@ -131,7 +131,9 @@ export const AddProduct: React.FC<Props> = ({
   return (
     <div>
       {showLoader ? (
+        <div className = "add-product-loader">
         <Loading />
+        </div>
       ) : (
         <div className="add-product-main-container">
           <div className="add-product-div">

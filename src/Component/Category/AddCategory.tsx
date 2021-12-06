@@ -65,7 +65,9 @@ export const AddCategory: React.FC<Props> = ({
     <div>
       {/* if show loader is true, show loader */}
       {showLoader ? (
+        <div className = "add-category-loader">
         <Loading />
+        </div>
       ) : (
         <div className="add-category-container">
           <div className="add-category-div">

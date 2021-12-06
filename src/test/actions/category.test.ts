@@ -67,9 +67,7 @@ describe("testing category actions", () => {
         expect(loadingDispatch).toHaveBeenCalledWith({ type: START_LOADING });
         expect(categoryDispatch).toHaveBeenCalledWith({
           type: FETCH_CATEGORY_ERROR,
-          payload: {
-            message: "Unable to fetch categories",
-          },
+          payload: undefined,
         });
         expect(loadingDispatch).toHaveBeenCalledWith({
           type: STOP_LOADING,

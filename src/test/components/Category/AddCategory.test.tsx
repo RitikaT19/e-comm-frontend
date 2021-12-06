@@ -55,11 +55,26 @@ describe("testing Add Category", () => {
     let textFields = wrapper.find("TextField").length;
     expect(wrapper.find("TextField")).toHaveLength(textFields);
   });
-  //   it("should call the handle change prop when a user types something in the password input field",()=>{
-  //     wrapper.find("#add-category-button_element").simulate("click")
-  //     const event = {target: {value:"tests"}};
-  //     const event2 = {target: {value: "test 123"}};
-  //     wrapper.find("#name_element").simulate("change", event2)
-  //     wrapper.find("#name_element").simulate("change", event)
-  // })
+  it("should call the handle change prop when a user types something in the password input field", () => {
+    wrapper.find("#add-category-button_element").simulate("click");
+    const event = { target: { value: "tests" } };
+    const event2 = { target: { value: "test 123" } };
+    wrapper.find("#category-name_element").simulate("change", event2);
+    wrapper.find("#category-name_element").simulate("change", event);
+  });
+
+  it("should call the handle change prop when a user types something in the password input field", () => {
+    wrapper2 = mount(<AddCategory {...defaultProps1} />);
+    wrapper.find("#add-category-button_element").simulate("click");
+    const event = { target: { value: "tests" } };
+    const event2 = { target: { value: "test 123" } };
+    wrapper.find("#category-name_element").simulate("change", event2);
+    wrapper.find("#category-name_element").simulate("change", event);
+  });
+
+  it("should check for Loader visible", () => {
+    wrapper.setProps({ showLoader: true });
+    expect(wrapper.find(".add-category-loader")).toHaveLength(1);
+  });
+
 });

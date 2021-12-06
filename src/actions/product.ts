@@ -10,6 +10,7 @@ import {
   DELETE_PRODUCT_ERROR,
   UPDATE_PRODUCT,
   UPDATE_PRODUCT_ERROR,
+  CLEAR_ERRORS,
 } from "./Types";
 import { API_URL } from "./serverConnection";
 import { Actions } from "../reducers/product";
@@ -38,7 +39,7 @@ export const createProduct =
     } catch (error) {
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
-      console.log(error,"asasaa")
+      console.log(error, "asasaa");
       dispatch({
         type: CREATE_PRODUCT_ERROR,
         payload: error.response
@@ -144,3 +145,10 @@ export const editProduct =
       });
     }
   };
+
+export const clearErrors = (dispatch: React.Dispatch<Actions>) => {
+  //Dispatch CLEAR_ERRORS type
+  dispatch({
+    type: CLEAR_ERRORS,
+  });
+};

@@ -68,7 +68,7 @@ import {
             expect(loadingDispatch).toHaveBeenCalledWith({ type: START_LOADING });
             expect(productDispatch).toHaveBeenCalledWith({
               type: FETCH_PRODUCT_ERROR,
-              payload: undefined,
+              payload: "Category deleted successfully!",
             });
             expect(loadingDispatch).toHaveBeenCalledWith({
               type: STOP_LOADING,

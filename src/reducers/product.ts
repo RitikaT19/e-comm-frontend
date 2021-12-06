@@ -7,6 +7,7 @@ import {
   DELETE_PRODUCT_ERROR,
   UPDATE_PRODUCT,
   UPDATE_PRODUCT_ERROR,
+  CLEAR_ERRORS,
 } from "../actions/Types";
 
 export type Actions =
@@ -41,6 +42,9 @@ export type Actions =
   | {
       type: typeof UPDATE_PRODUCT_ERROR;
       payload: string;
+    }
+  | {
+      type: typeof CLEAR_ERRORS;
     };
 
 interface ProductInterface {
@@ -111,6 +115,18 @@ export const Product = (state: State = initialState, action: Actions) => {
       return {
         ...state,
         updateProductError: action.payload,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null,
+        createProductError: null,
+        createProductSuccess: null,
+        fetchProductError: null,
+        deleteProductSuccess: null,
+        deleteProductError: null,
+        updateProductSuccess: null,
+        updateProductError: null,
       };
 
     default:
