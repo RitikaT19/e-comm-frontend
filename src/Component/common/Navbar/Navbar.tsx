@@ -11,9 +11,9 @@ export const Navbar: React.FC = () => {
         </NavLink>
       </div>
       <div id="navbar_buttons">
-        <NavLink exact className="active_class" to="/">
+        {/* <NavLink exact className="active_class" to="/">
           Login
-        </NavLink>
+        </NavLink> */}
       </div>
     </div>
   );

@@ -26,7 +26,8 @@ export const addUser =
         type: SIGN_UP,
         payload: result.data.message,
       });
-    } catch (error) {
+    } catch (err) {
+      const error: any = err;
       // dispatch stop loading in case of error
       stopLoading(loadingDispatch);
       // dispatch error data

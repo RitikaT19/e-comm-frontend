@@ -43,17 +43,16 @@ export const AddCategory: React.FC<Props> = ({
       setNameError("");
     }
   };
-  console.log(successMessage, "error from category")
+  console.log(successMessage, "error from category");
 
   // function for when submitCategory button is clicked
   const submitCategory = async () => {
     if (!name) {
       setShowEmptyFieldError(true);
-    }
-    else{
+    } else {
       // call handle add category with name
-    await handleAddCategory({ name });
-    console.log(name, "name from add category");
+      await handleAddCategory({ name });
+      console.log(name, "name from add category");
     }
   };
   const editCategoryButtonClick = async () => {
@@ -65,43 +64,44 @@ export const AddCategory: React.FC<Props> = ({
     <div>
       {/* if show loader is true, show loader */}
       {showLoader ? (
-        <div className = "add-category-loader">
-        <Loading />
+        <div className="add-category-loader">
+          <Loading />
         </div>
       ) : (
         <div className="add-category-container">
-          <div className="add-category-div">
-            <div className="close-button">
-              {/* cross button */}
-              <img src={cross} alt="cross" onClick={CrossIconClick} />
+          <div className="add-category-background">
+            <div className="add-category-div">
+              <div className="close-button">
+                {/* cross button */}
+                <img src={cross} alt="cross" onClick={CrossIconClick} />
+              </div>
+              {/* input for category name */}
+              <Textfield
+                id="category-name"
+                label={isEdit ? "Edit Category" : "Add Category"}
+                placeholder="Enter category name here"
+                value={name}
+                onChange={(e: any) => setName(e.target.value)}
+                error={nameError}
+                onBlur={checkCategory}
+              />
             </div>
-            {/* input for category name */}
-            <Textfield
-              id="category-name"
-              label={isEdit ? "Edit Category" : "Add Category"}
-              placeholder="Enter category name here"
-              value={name}
-              onChange={(e: any) => setName(e.target.value)}
-              error={nameError}
-              onBlur={checkCategory}
+            {errorMessage ? (
+              <p className="add-user-error"> {errorMessage}</p>
+            ) : successMessage ? (
+              <p className="add-user-success">{successMessage}</p>
+            ) : (
+              showEmptyFieldError && (
+                <p className="add-user-error">Please fill all the fields</p>
+              )
+            )}
+            {/* button for submitting category */}
+            <Button
+              id={isEdit ? "edit-category-button" : "add-category-button"}
+              value={isEdit ? "Edit Category" : "Add Category"}
+              handleClick={isEdit ? editCategoryButtonClick : submitCategory}
             />
           </div>
-          {errorMessage ? (
-            <p className="add-user-error"> {errorMessage}</p>
-           
-          ) : successMessage ? (
-            <p className="add-user-success">{successMessage}</p>
-          ) : (
-            showEmptyFieldError && (
-              <p className="add-user-error">Please fill all the fields</p>
-            )
-          )}
-          {/* button for submitting category */}
-          <Button
-            id={isEdit ? "edit-category-button" : "add-category-button"}
-            value={isEdit ? "Edit Category" : "Add Category"}
-            handleClick={isEdit ? editCategoryButtonClick : submitCategory}
-          />
         </div>
       )}
     </div>

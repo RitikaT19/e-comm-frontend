@@ -5,16 +5,18 @@
   backdrop-filter: blur(1.7px);
   width: 100vw;
   height: 150vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(70, 77, 80, 0.3);
   position: fixed;
   /* display: flex; */
-  
+  /* background-color: aqua; */
   z-index:2000;
   left:0;
   top:0;
+ 
 }
 .add-category-div{
     margin-top: 150px;
+    
 }
 #category-name_element{
     color: black;
@@ -23,10 +25,20 @@
 }
 #add-category-button_element{
     margin-top: 10px;
+    margin-bottom: 60px;
 }
 .close-button{
     margin-left: 390px;
     align-content: flex-end;
     color:white;
     cursor: pointer;
+    padding-top: 40px;
+    
+}
+.add-category-background{
+    width: 50%;
+    background-color: azure;
+    padding-bottom: 20px;
+    border-radius: 10px;  
+    
 }

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Login } from "../Login/Login";
 import { LoginContext } from "../../contexts/Login";
 import { LoadingContext } from "../../contexts/Loading";
@@ -14,6 +14,8 @@ export const LoginAdmin: React.FC<Props> = (props) => {
   const { state: loginState, dispatch: loginDispatch } =
     useContext(LoginContext);
   const { dispatch: loadingDispatch } = useContext(LoadingContext);
+  // const [user, setUser] = useState()
+
 
   // function for login
   const clickLoginButton = async (email: string, password: string) => {
@@ -27,6 +29,14 @@ export const LoginAdmin: React.FC<Props> = (props) => {
       localStorage.setItem("login", JSON.stringify({ email, password }));
     });
   };
+
+  // useEffect(()=>{
+  //       const loggedInUser = localStorage.getItem("E_COMM: AUTH_TOKEN")
+  //       if(loggedInUser){
+  //         const foundUser = JSON.parse(loggedInUser);
+  //        
+  //       }
+  //     },[])
   return (
     <div>
       <Navbar />

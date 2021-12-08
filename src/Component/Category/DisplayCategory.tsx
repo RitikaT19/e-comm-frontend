@@ -16,17 +16,10 @@ export const DisplayCategory: React.FC<Props> = ({
   updateCategoryIconClick,
   showLoader,
 }) => {
-  const [category, setCategory] = useState<any>();
-
   // function when on delete button is called
   const onDelete = (index: number) => {
     deleteCategory(categoryInfo[index]?._id);
   };
-  // function for when onedit button is called
-  // const onEdit = (item: any) => {
-  //   setCategory(item)
-  //   updateCategoryIconClick(categoryInfo[index]?._id);
-  // };
 
   return (
     <div>

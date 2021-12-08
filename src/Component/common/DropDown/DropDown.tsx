@@ -23,6 +23,7 @@ export const DropDown: React.FC<Props> = ({
 }) => {
   //showOptions variable and setShowOptions method for showing/hiding the Options
   const [showOptions, setShowOptions] = useState<boolean>(false);
+  const [selectedLabel, setSelectedLabel] = useState<string>("");
   var dropDownOptions: Array<string> = [];
   // for received options
   if (options) {
@@ -61,9 +62,27 @@ export const DropDown: React.FC<Props> = ({
     [wrapperRef]
   );
 
+  useEffect(() => {
+    getLabelForSelectedValue();
+  }, [value]);
+
+  const getLabelForSelectedValue = () => {
+    const _options = [...(options as Array<any>)];
+
+    const selectedIndex: number = _options.findIndex(
+      (option) => option?.value === value
+    );
+
+    if (selectedIndex != -1) {
+      setSelectedLabel(_options[selectedIndex].label);
+    } else {
+      setSelectedLabel(label);
+    }
+  };
+
   return (
     // Main
-    <div className="drop-down-main-container">
+    <div className="drop-down-main-container no-select">
       {/* Label */}
       {showLabel && (
         <label className="dropdown-label" htmlFor={id + "_element"}>
@@ -72,7 +91,7 @@ export const DropDown: React.FC<Props> = ({
       )}
       <div
         id={id + "-drop-down-main"}
-        className="drop-down-main"
+        className="drop-down-main no-select"
         // for hiding the dropdown options when user clicks outside
         // assigning a reference of useRef to this List
         ref={wrapperRef}
@@ -85,8 +104,11 @@ export const DropDown: React.FC<Props> = ({
           onClick={() => setShowOptions(!showOptions)}
         >
           {/* label / selected value */}
-          <p id={id + "-selected-option-text"} className="selected-option-text">
-            {value && value.length !== 0 ? value : label}
+          <p
+            id={id + "-selected-option-text"}
+            className="selected-option-text no-select"
+          >
+            {selectedLabel}
           </p>
           {/* down arrow icon */}
           <img
@@ -107,7 +129,7 @@ export const DropDown: React.FC<Props> = ({
               dropDownOptions.map((option: any, index) =>
                 typeof option === "object" ? (
                   <div
-                    id={id + "-" + option + "-drop-down-option"}
+                    id={id + "-" + option.value + "-drop-down-option"}
                     key={id + option.value + "-div"}
                   >
                     {/* The Option value */}
@@ -123,8 +145,8 @@ export const DropDown: React.FC<Props> = ({
                       id={id + "-" + option.value + "-drop-down-option-li"}
                       key={id + option.value + "-li"}
                       className={
-                        "drop-down-option" +
-                        (value === option.label
+                        "drop-down-option no-select" +
+                        (value === option.value
                           ? " drop-down-selected-option"
                           : "")
                       }

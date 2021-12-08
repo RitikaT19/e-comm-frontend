@@ -28,3 +28,6 @@
        margin-left: 390px;
        
     }
+    .main-nav-active{
+        color: red;
+    }

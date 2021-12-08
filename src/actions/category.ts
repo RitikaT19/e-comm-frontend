@@ -36,14 +36,15 @@ export const getCategory =
         type: FETCH_CATEGORY,
         payload: result.data.data,
       });
-    } catch (error) {
+    } catch (err) {
+      const error:any = err;
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       // dispatch error data
       dispatch({
         type: FETCH_CATEGORY_ERROR,
         payload: error.response
-          ? error.response.data.message
+          ? error.response.data?.message
           : "Failed to connect with the server",
       });
     }
@@ -69,10 +70,10 @@ export const createNewCategory =
         type: CREATE_CATEGORY,
         payload: result.data.result,
       });
-    } catch (error) {
+    } catch (err) {
+      const error:any = err;
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
-      console.log(error, "error fro, axiossssss")
       dispatch({
         type: CREATE_CATEGORY_ERROR,
         payload: error.response
@@ -102,7 +103,8 @@ export const deleteCategory =
         type: DELETE_CATEGORY,
         payload: result.data,
       });
-    } catch (error) {
+    } catch (err) {
+      const error: any = err;
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       dispatch({
@@ -130,9 +132,10 @@ export const editCategory =
       // dispatch result
       dispatch({
         type: UPDATE_CATEGORY,
-        payload: result.data.message,
+        payload: result.data?.message,
       });
-    } catch (error) {
+    } catch (err) {
+      const error:any = err;
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       dispatch({

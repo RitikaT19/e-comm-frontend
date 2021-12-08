@@ -68,12 +68,15 @@ export const Product: React.FC = () => {
       setShowAddProductLoader(false);
     });
     setTimeout(() => {
-      setShowProductPage(false);
-      clearErrors(productDispatch)
+      if(productState.createProductSuccess){
+        setShowProductPage(false);
+        clearErrors(productDispatch)
+      }
     }, 2000);
     // call fetchProducts after adding a new product
     fetchProducts(id);
   };
+ 
 
   // function for deleting product
   const deleteProduct = async (id: any, category: any) => {

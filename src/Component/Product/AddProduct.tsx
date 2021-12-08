@@ -127,12 +127,18 @@ export const AddProduct: React.FC<Props> = ({
     options.push({ value: category._id, label: category.name });
   });
 
-  console.log(options, "category names");
+  var avoidAlphabet = ["e"];
+  if (avoidAlphabet) {
+  }
+
+  type State = {
+    value: number;
+  };
   return (
     <div>
       {showLoader ? (
-        <div className = "add-product-loader">
-        <Loading />
+        <div className="add-product-loader">
+          <Loading />
         </div>
       ) : (
         <div className="add-product-main-container">
@@ -146,7 +152,9 @@ export const AddProduct: React.FC<Props> = ({
                 label="Select category"
                 options={options}
                 id="category-dropdown"
-                handleChange={(e: any) => setSelectedCategory(e.value)}
+                handleChange={(e: any) => {
+                  setSelectedCategory(e.value);
+                }}
                 showLabel={false}
                 value={selectedCategory}
               />
@@ -163,17 +171,21 @@ export const AddProduct: React.FC<Props> = ({
             />
             {/*textfield for price  */}
             <Textfield
+              // type="number"
               label="Price"
               placeholder="Enter the price of the product"
               value={price}
               id="price"
-              onChange={(e: any) => setPrice(e.target.value)}
+              onChange={(e: any) => {
+                setPrice(e.target.value);
+              }}
               error={priceError}
               onBlur={checkPrice}
             />
 
             {/* Textfield for quantity */}
             <Textfield
+              type="number"
               label="Quantity"
               placeholder="Enter the quantity of the product"
               value={quantity}
@@ -188,7 +200,9 @@ export const AddProduct: React.FC<Props> = ({
               placeholder="Enter the description of the product"
               value={description}
               id="description"
-              onChange={(e: any) => setDescription(e.target.value)}
+              onChange={(e: any) => {
+                setDescription(e.target.value);
+              }}
             />
             {errorMessage ? (
               <p className="sign-in-error">{errorMessage}</p>
@@ -212,3 +226,15 @@ export const AddProduct: React.FC<Props> = ({
     </div>
   );
 };
+
+
+
+
+// Rules for the Game of Cricket
+// Match is of 10 overs
+// If wickets is equal to 10 or over is equal to 10 the match will stopped
+// It will generate random number between 0 and 8
+// If number is equal to 8 then it is wickets
+// If number is equal to 7 then it can be noball or wide ball
+// If number is 1 or 3 or 5 then stricker batsman will swap with non stricker
+// Remaining number will only update the total score -

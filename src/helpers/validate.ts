@@ -12,7 +12,7 @@ export const isQuantityValid = (quantity: string) => {
   return /^([0-9]{1,})$/.test(quantity);
 };
 export const isPriceValid = (quantity: string) => {
-  return /^([0-9]{1,})$/.test(quantity);
+  return /^[0-9]{1,}(\.\d{1,2})?%?$/.test(quantity);
 };
 export const isPasswordValid = (password: string) => {
   return password.length >= 4;

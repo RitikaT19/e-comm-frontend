@@ -3,9 +3,10 @@ import { stopLoading, startLoading } from "./loading";
 import { Actions as LoadingActions } from "../reducers/loading";
 import { API_URL } from "./serverConnection";
 import { Actions } from "../reducers/login";
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { History } from "history";
+import { setupMaster } from "cluster";
 
 // function for sign in
 export const signIn =
@@ -39,7 +40,8 @@ export const signIn =
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       // redirect to /category after sign in
       history?.push("/category");
-    } catch (error) {
+    } catch (err) {
+      const error:any = err;
       // in case of error, dispatch stop loading
       stopLoading(loadingDispatch);
       dispatch({

@@ -11,6 +11,7 @@
     margin-right: 10px;
     margin-left: 20px;
 }
-#display-category-name:hover{
-  color:red;
+
+.active_category{
+  color: red;
 }

@@ -13,14 +13,14 @@ export const SideBar: React.FC = () => {
           Admin Dashboard
         </NavLink>
       </div>
-      <div id="sidebar_buttons">
-        <NavLink exact className="active_class" to="/category">
+      <div id="sidebar_buttons" >
+        <NavLink exact className="active_class" activeClassName = "main-nav-active" to="/category">
           Category
         </NavLink>
-        <NavLink exact className="active_class" to="/product/61a9c8ed84e2105f6245bd4b">
+        <NavLink exact className="active_class" activeClassName = "main-nav-active" to="/product/61a9c8ed84e2105f6245bd4b">
           Product
         </NavLink>
-        <NavLink exact className="active_class" to="/sign-up">
+        <NavLink exact className="active_class" activeClassName = "main-nav-active" to="/sign-up">
           Make admin
         </NavLink>
         <div className = "sidebar-logout-button">
